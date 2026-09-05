@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/features/auth/presentation/auth_controller.dart';
+import 'package:fixmytown_citizen/features/auth/presentation/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

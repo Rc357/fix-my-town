@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/config/app_config.dart';
-import 'package:aninag_citizen/bootstrap.dart';
+import 'package:fixmytown_citizen/app/config/app_config.dart';
+import 'package:fixmytown_citizen/bootstrap.dart';
 
 Future<void> main() =>
     bootstrap(AppConfig.fromEnvironment(fallbackFlavor: AppFlavor.production));

@@ -1,6 +1,6 @@
-import 'package:aninag_citizen/app/config/app_config.dart';
-import 'package:aninag_citizen/app/router/app_router.dart';
-import 'package:aninag_citizen/app/theme/app_theme.dart';
+import 'package:fixmytown_citizen/app/config/app_config.dart';
+import 'package:fixmytown_citizen/app/router/app_router.dart';
+import 'package:fixmytown_citizen/app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

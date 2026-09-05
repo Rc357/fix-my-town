@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
 import 'package:flutter/material.dart';
 
 /// `.map-box` from the mockup. A lightweight placeholder — grid + pin, no
@@ -16,7 +16,7 @@ class MapPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(AninagRadius.card),
+      borderRadius: BorderRadius.circular(FmtRadius.card),
       child: SizedBox(
         height: height,
         width: double.infinity,
@@ -28,18 +28,18 @@ class MapPreview extends StatelessWidget {
             const Center(
               child: Icon(
                 Icons.location_pin,
-                color: AninagColors.red,
+                color: FmtColors.red,
                 size: 30,
               ),
             ),
             if (address != null)
               Positioned(
-                left: AninagSpace.sm,
-                right: AninagSpace.sm,
-                bottom: AninagSpace.sm,
+                left: FmtSpace.sm,
+                right: FmtSpace.sm,
+                bottom: FmtSpace.sm,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: AninagSpace.sm,
+                    horizontal: FmtSpace.sm,
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class MapPreview extends StatelessWidget {
                       const Icon(
                         Icons.place,
                         size: 12,
-                        color: AninagColors.brand,
+                        color: FmtColors.brand,
                       ),
                       const SizedBox(width: 5),
                       Flexible(
@@ -80,7 +80,7 @@ class _GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AninagColors.brand.withValues(alpha: 0.08)
+      ..color = FmtColors.brand.withValues(alpha: 0.08)
       ..strokeWidth = 1;
     const step = 24.0;
     for (var x = 0.0; x < size.width; x += step) {

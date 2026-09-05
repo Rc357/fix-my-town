@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
 import 'package:flutter/material.dart';
 
 /// `.photo-slot` from the mockup. Wraps the actual camera capture flow —
@@ -32,16 +32,16 @@ class PhotoSlot extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AninagRadius.card),
+        borderRadius: BorderRadius.circular(FmtRadius.card),
         child: Container(
           height: height,
           width: double.infinity,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: AninagColors.surface,
-            borderRadius: BorderRadius.circular(AninagRadius.card),
+            color: FmtColors.surface,
+            borderRadius: BorderRadius.circular(FmtRadius.card),
             border: Border.all(
-              color: filled ? AninagColors.brand : AninagColors.line,
+              color: filled ? FmtColors.brand : FmtColors.line,
             ),
           ),
           child: filled
@@ -56,7 +56,7 @@ class PhotoSlot extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 4,
-                          horizontal: AninagSpace.sm,
+                          horizontal: FmtSpace.sm,
                         ),
                         color: Colors.black.withValues(alpha: 0.55),
                         child: Text(
@@ -77,16 +77,16 @@ class PhotoSlot extends StatelessWidget {
                     const Icon(
                       Icons.camera_alt_outlined,
                       size: 22,
-                      color: AninagColors.muted,
+                      color: FmtColors.muted,
                     ),
-                    const SizedBox(height: AninagSpace.xs),
+                    const SizedBox(height: FmtSpace.xs),
                     Text(
                       required ? '$label *required' : label,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: AninagColors.muted,
+                        color: FmtColors.muted,
                       ),
                     ),
                   ],

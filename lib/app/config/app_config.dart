@@ -32,7 +32,7 @@ class AppConfig {
       flavor: flavor,
       appName: const String.fromEnvironment(
         'APP_NAME',
-        defaultValue: 'Aninag Citizen',
+        defaultValue: 'FixMyTown Citizen',
       ),
       apiBaseUrl: Uri.parse(
         configuredUrl.isEmpty ? _defaultApiUrl(flavor) : configuredUrl,

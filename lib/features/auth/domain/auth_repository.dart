@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/features/auth/domain/app_user.dart';
+import 'package:fixmytown_citizen/features/auth/domain/app_user.dart';
 
 abstract interface class AuthRepository {
   AppUser? get currentUser;

@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/map_preview.dart';
-import 'package:aninag_citizen/app/widgets/photo_slot.dart';
-import 'package:aninag_citizen/app/widgets/stepper_dots.dart';
-import 'package:aninag_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/app/widgets/map_preview.dart';
+import 'package:fixmytown_citizen/app/widgets/photo_slot.dart';
+import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,12 +31,12 @@ class CaptureScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Photo & location')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.lg),
+          padding: const EdgeInsets.all(FmtSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StepperDots(total: 3, currentIndex: 1),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -46,7 +46,7 @@ class CaptureScreen extends ConsumerWidget {
                         'PHOTO *REQUIRED',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: AninagSpace.sm),
+                      const SizedBox(height: FmtSpace.sm),
                       PhotoSlot(
                         label: draft.hasPhoto
                             ? 'Photo attached'
@@ -58,12 +58,12 @@ class CaptureScreen extends ConsumerWidget {
                             : null,
                         onTap: controller.capturePhoto,
                       ),
-                      const SizedBox(height: AninagSpace.xl),
+                      const SizedBox(height: FmtSpace.xl),
                       Text(
                         'LOCATION *REQUIRED',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: AninagSpace.sm),
+                      const SizedBox(height: FmtSpace.sm),
                       if (draft.hasLocation)
                         MapPreview(address: draft.formattedLocation)
                       else
@@ -71,7 +71,7 @@ class CaptureScreen extends ConsumerWidget {
                           height: 120,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            border: Border.all(color: AninagColors.line),
+                            border: Border.all(color: FmtColors.line),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: draft.isLocating
@@ -84,7 +84,7 @@ class CaptureScreen extends ConsumerWidget {
                         ),
                       if (draft.hasLocation)
                         Padding(
-                          padding: const EdgeInsets.only(top: AninagSpace.sm),
+                          padding: const EdgeInsets.only(top: FmtSpace.sm),
                           child: TextButton.icon(
                             onPressed: controller.captureLocation,
                             icon: const Icon(Icons.refresh, size: 16),
@@ -95,7 +95,7 @@ class CaptureScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               PrimaryButton(
                 label: 'Next',
                 onPressed: draft.hasPhoto && draft.hasLocation

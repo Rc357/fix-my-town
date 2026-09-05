@@ -1,6 +1,6 @@
-import 'package:aninag_citizen/features/incident_reporting/data/in_memory_report_repository.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report_repository.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/in_memory_report_repository.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final reportRepositoryProvider = Provider<ReportRepository>((ref) {

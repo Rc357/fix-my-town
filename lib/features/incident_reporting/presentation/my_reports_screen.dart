@@ -1,8 +1,8 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:aninag_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:aninag_citizen/features/incident_reporting/presentation/widgets/report_list_tile.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,19 +25,19 @@ class MyReportsScreen extends ConsumerWidget {
             if (reports.isEmpty) {
               return const Center(
                 child: Padding(
-                  padding: EdgeInsets.all(AninagSpace.xl),
+                  padding: EdgeInsets.all(FmtSpace.xl),
                   child: Text(
                     "You haven't reported anything yet.",
-                    style: TextStyle(color: AninagColors.muted),
+                    style: TextStyle(color: FmtColors.muted),
                   ),
                 ),
               );
             }
             return ListView.separated(
-              padding: const EdgeInsets.all(AninagSpace.lg),
+              padding: const EdgeInsets.all(FmtSpace.lg),
               itemCount: reports.length,
               separatorBuilder: (context, index) =>
-                  const SizedBox(height: AninagSpace.sm),
+                  const SizedBox(height: FmtSpace.sm),
               itemBuilder: (context, index) {
                 final report = reports[index];
                 return ReportListTile(

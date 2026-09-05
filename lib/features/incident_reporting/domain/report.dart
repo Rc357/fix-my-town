@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/widgets/status_chip.dart';
-import 'package:aninag_citizen/app/widgets/workflow_timeline.dart';
+import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
+import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
 
 /// The v1 pipeline — deliberately has no AI-validation step. AI features are
 /// deferred (see docs/10-ai-design.md and docs/11-roadmap.md): every report

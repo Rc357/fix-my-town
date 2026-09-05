@@ -1,10 +1,10 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/workflow_timeline.dart';
-import 'package:aninag_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report_category.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,12 +27,12 @@ class ReportDetailScreen extends ConsumerWidget {
           data: (report) {
             if (report == null) {
               return Padding(
-                padding: const EdgeInsets.all(AninagSpace.xl),
+                padding: const EdgeInsets.all(FmtSpace.xl),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Icon(Icons.search_off, size: 48, color: AninagColors.muted),
-                    SizedBox(height: AninagSpace.md),
+                    Icon(Icons.search_off, size: 48, color: FmtColors.muted),
+                    SizedBox(height: FmtSpace.md),
                     Text(
                       "We couldn't find a report with that tracking ID.",
                       textAlign: TextAlign.center,
@@ -59,7 +59,7 @@ class _ReportDetailBody extends ConsumerWidget {
     final category = ReportCategories.byId(report.categoryId);
 
     return Padding(
-      padding: const EdgeInsets.all(AninagSpace.lg),
+      padding: const EdgeInsets.all(FmtSpace.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -69,12 +69,12 @@ class _ReportDetailBody extends ConsumerWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AninagColors.brandTint,
+                  color: FmtColors.brandTint,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(category.icon, color: AninagColors.brandInk),
+                child: Icon(category.icon, color: FmtColors.brandInk),
               ),
-              const SizedBox(width: AninagSpace.md),
+              const SizedBox(width: FmtSpace.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class _ReportDetailBody extends ConsumerWidget {
                       report.trackingId,
                       style: const TextStyle(
                         fontSize: 11,
-                        color: AninagColors.muted,
+                        color: FmtColors.muted,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -99,7 +99,7 @@ class _ReportDetailBody extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AninagSpace.lg),
+          const SizedBox(height: FmtSpace.lg),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -111,28 +111,28 @@ class _ReportDetailBody extends ConsumerWidget {
                       'CITIZEN NOTE',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    const SizedBox(height: AninagSpace.xs),
+                    const SizedBox(height: FmtSpace.xs),
                     Text(
                       report.description,
                       style: const TextStyle(
                         fontSize: 12.5,
-                        color: AninagColors.ink,
+                        color: FmtColors.ink,
                       ),
                     ),
-                    const SizedBox(height: AninagSpace.lg),
+                    const SizedBox(height: FmtSpace.lg),
                   ],
                   Text(
                     'LOCATION',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
-                  const SizedBox(height: AninagSpace.xs),
+                  const SizedBox(height: FmtSpace.xs),
                   Text(report.address, style: const TextStyle(fontSize: 12.5)),
                 ],
               ),
             ),
           ),
           if (report.status.needsCitizenConfirmation) ...[
-            const SizedBox(height: AninagSpace.md),
+            const SizedBox(height: FmtSpace.md),
             Row(
               children: [
                 Expanded(
@@ -142,7 +142,7 @@ class _ReportDetailBody extends ConsumerWidget {
                         ref.read(reportRepositoryProvider).dispute(report.id),
                   ),
                 ),
-                const SizedBox(width: AninagSpace.sm),
+                const SizedBox(width: FmtSpace.sm),
                 Expanded(
                   child: PrimaryButton(
                     label: 'Confirm resolved',

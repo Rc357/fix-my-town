@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:flutter/material.dart';
 
 /// `.stepper-mini` from the mockup — multi-step form progress
@@ -23,11 +23,11 @@ class StepperDots extends StatelessWidget {
             height: 9,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: i <= currentIndex ? AninagColors.amber : AninagColors.line,
+              color: i <= currentIndex ? FmtColors.amber : FmtColors.line,
             ),
           ),
           if (i != total - 1)
-            Expanded(child: Container(height: 2, color: AninagColors.line)),
+            Expanded(child: Container(height: 2, color: FmtColors.line)),
         ],
       ],
     );

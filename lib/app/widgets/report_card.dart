@@ -1,6 +1,6 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/status_chip.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
 import 'package:flutter/material.dart';
 
 /// `.card` with `.stripe` from the mockup. The severity stripe is required,
@@ -35,13 +35,13 @@ class ReportCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AninagRadius.card),
+        borderRadius: BorderRadius.circular(FmtRadius.card),
         child: Container(
-          padding: const EdgeInsets.all(AninagSpace.md),
+          padding: const EdgeInsets.all(FmtSpace.md),
           decoration: BoxDecoration(
-            color: AninagColors.surface,
-            borderRadius: BorderRadius.circular(AninagRadius.card),
-            border: Border.all(color: AninagColors.line),
+            color: FmtColors.surface,
+            borderRadius: BorderRadius.circular(FmtRadius.card),
+            border: Border.all(color: FmtColors.line),
           ),
           child: IntrinsicHeight(
             child: Row(
@@ -54,7 +54,7 @@ class ReportCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
-                const SizedBox(width: AninagSpace.md),
+                const SizedBox(width: FmtSpace.md),
                 Container(
                   width: 36,
                   height: 36,
@@ -64,7 +64,7 @@ class ReportCard extends StatelessWidget {
                   ),
                   child: Icon(icon, color: iconColor, size: 18),
                 ),
-                const SizedBox(width: AninagSpace.md),
+                const SizedBox(width: FmtSpace.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,12 +78,12 @@ class ReportCard extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w800,
-                                color: AninagColors.ink,
+                                color: FmtColors.ink,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const SizedBox(width: AninagSpace.sm),
+                          const SizedBox(width: FmtSpace.sm),
                           StatusChip(label: statusLabel, tone: statusTone),
                         ],
                       ),
@@ -92,7 +92,7 @@ class ReportCard extends StatelessWidget {
                         meta,
                         style: const TextStyle(
                           fontSize: 11,
-                          color: AninagColors.muted,
+                          color: FmtColors.muted,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

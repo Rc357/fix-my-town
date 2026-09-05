@@ -1,9 +1,9 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/stepper_dots.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report_category.dart';
-import 'package:aninag_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -52,12 +52,12 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       appBar: AppBar(title: const Text('Add details')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.lg),
+          padding: const EdgeInsets.all(FmtSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StepperDots(total: 3, currentIndex: 2),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -67,7 +67,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                         'DESCRIPTION (OPTIONAL)',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: AninagSpace.sm),
+                      const SizedBox(height: FmtSpace.sm),
                       TextField(
                         controller: _descriptionController,
                         maxLines: 4,
@@ -77,17 +77,17 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                               'Anything staff should know before they respond?',
                         ),
                       ),
-                      const SizedBox(height: AninagSpace.md),
+                      const SizedBox(height: FmtSpace.md),
                       Text(
                         'REVIEW',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: AninagSpace.sm),
+                      const SizedBox(height: FmtSpace.sm),
                       Container(
-                        padding: const EdgeInsets.all(AninagSpace.md),
+                        padding: const EdgeInsets.all(FmtSpace.md),
                         decoration: BoxDecoration(
-                          color: AninagColors.surface,
-                          border: Border.all(color: AninagColors.line),
+                          color: FmtColors.surface,
+                          border: Border.all(color: FmtColors.line),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: Row(
@@ -96,15 +96,15 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
-                                color: AninagColors.brandTint,
+                                color: FmtColors.brandTint,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
                                 category?.icon ?? Icons.help_outline,
-                                color: AninagColors.brandInk,
+                                color: FmtColors.brandInk,
                               ),
                             ),
-                            const SizedBox(width: AninagSpace.md),
+                            const SizedBox(width: FmtSpace.md),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,14 +121,14 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                                     draft.formattedLocation,
                                     style: const TextStyle(
                                       fontSize: 11,
-                                      color: AninagColors.muted,
+                                      color: FmtColors.muted,
                                     ),
                                   ),
                                   const Text(
                                     '1 photo attached',
                                     style: TextStyle(
                                       fontSize: 11,
-                                      color: AninagColors.muted,
+                                      color: FmtColors.muted,
                                     ),
                                   ),
                                 ],
@@ -141,7 +141,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               PrimaryButton(
                 label: 'Submit report',
                 loading: draft.isSubmitting,

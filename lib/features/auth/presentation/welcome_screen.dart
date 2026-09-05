@@ -1,7 +1,7 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/map_preview.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/app/widgets/map_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,25 +13,25 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.xl),
+          padding: const EdgeInsets.all(FmtSpace.xl),
           child: Column(
             children: [
               const Spacer(),
               const MapPreview(height: 180),
-              const SizedBox(height: AninagSpace.xl),
+              const SizedBox(height: FmtSpace.xl),
               const Text(
-                'Aninag',
+                'FixMyTown',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
-                  color: AninagColors.brandInk,
+                  color: FmtColors.brandInk,
                 ),
               ),
-              const SizedBox(height: AninagSpace.xs),
+              const SizedBox(height: FmtSpace.xs),
               const Text(
                 'See it. Report it. Track it.',
                 style: TextStyle(
-                  color: AninagColors.muted,
+                  color: FmtColors.muted,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -40,16 +40,16 @@ class WelcomeScreen extends StatelessWidget {
                 label: 'Sign in',
                 onPressed: () => context.push('/login'),
               ),
-              const SizedBox(height: AninagSpace.sm),
+              const SizedBox(height: FmtSpace.sm),
               OutlineButton(
                 label: 'Continue as guest',
                 onPressed: () => context.go('/home'),
               ),
-              const SizedBox(height: AninagSpace.md),
+              const SizedBox(height: FmtSpace.md),
               const Text(
                 'Guest reports are tracked by ID only — sign in to get updates and history.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, color: AninagColors.muted),
+                style: TextStyle(fontSize: 11, color: FmtColors.muted),
               ),
             ],
           ),

@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
 import 'package:flutter/material.dart';
 
 /// `.category-tile` from the mockup. The visual tile can stay compact, but
@@ -28,25 +28,25 @@ class CategoryTile extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AninagRadius.tile),
+        borderRadius: BorderRadius.circular(FmtRadius.tile),
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
           child: Stack(
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(
-                  vertical: AninagSpace.sm,
+                  vertical: FmtSpace.sm,
                   horizontal: 2,
                 ),
                 decoration: BoxDecoration(
                   color: selected
-                      ? AninagColors.brandTint
-                      : AninagColors.surface,
+                      ? FmtColors.brandTint
+                      : FmtColors.surface,
                   border: Border.all(
-                    color: selected ? AninagColors.brand : AninagColors.line,
+                    color: selected ? FmtColors.brand : FmtColors.line,
                     width: selected ? 1.6 : 1,
                   ),
-                  borderRadius: BorderRadius.circular(AninagRadius.tile),
+                  borderRadius: BorderRadius.circular(FmtRadius.tile),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -56,17 +56,17 @@ class CategoryTile extends StatelessWidget {
                       height: 34,
                       decoration: BoxDecoration(
                         color: selected
-                            ? AninagColors.brand
-                            : AninagColors.brandTint,
+                            ? FmtColors.brand
+                            : FmtColors.brandTint,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(
                         icon,
                         size: 17,
-                        color: selected ? Colors.white : AninagColors.brandInk,
+                        color: selected ? Colors.white : FmtColors.brandInk,
                       ),
                     ),
-                    const SizedBox(height: AninagSpace.xs + 2),
+                    const SizedBox(height: FmtSpace.xs + 2),
                     Text(
                       label,
                       textAlign: TextAlign.center,
@@ -74,7 +74,7 @@ class CategoryTile extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 9.8,
                         fontWeight: FontWeight.w700,
-                        color: AninagColors.ink,
+                        color: FmtColors.ink,
                         height: 1.2,
                       ),
                     ),
@@ -89,7 +89,7 @@ class CategoryTile extends StatelessWidget {
                     width: 14,
                     height: 14,
                     decoration: const BoxDecoration(
-                      color: AninagColors.red,
+                      color: FmtColors.red,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(

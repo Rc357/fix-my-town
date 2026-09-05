@@ -1,7 +1,7 @@
-import 'package:aninag_citizen/features/incident_reporting/data/device_capture_service.dart';
-import 'package:aninag_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report_repository.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/device_capture_service.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final deviceCaptureServiceProvider = Provider<DeviceCaptureService>(

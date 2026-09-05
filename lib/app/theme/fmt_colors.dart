@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Design tokens from docs-mobile/04-design-system.md. Semantic status
 /// colors (amber/green/red/blue) are deliberately separate from the brand
 /// accent — never repurpose a status color for a non-status UI element.
-abstract final class AninagColors {
+abstract final class FmtColors {
   static const ink = Color(0xFF16211D);
   static const paper = Color(0xFFF4F1E6);
   static const surface = Color(0xFFFFFFFF);

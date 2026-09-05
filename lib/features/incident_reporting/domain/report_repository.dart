@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
 
 class NewReportDraft {
   const NewReportDraft({

@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
 import 'package:flutter/material.dart';
 
 /// The fixed set of semantic tones a status can render as — deliberately
@@ -12,11 +12,11 @@ enum StatusTone { pending, progress, resolved, alert, action }
 /// one status, one color, everywhere it appears on screen.
 (Color background, Color foreground) statusToneColors(StatusTone tone) =>
     switch (tone) {
-      StatusTone.pending => (AninagColors.blueTint, AninagColors.blue),
-      StatusTone.progress => (AninagColors.amberTint, AninagColors.amber),
-      StatusTone.resolved => (AninagColors.greenTint, AninagColors.green),
-      StatusTone.alert => (AninagColors.redTint, AninagColors.red),
-      StatusTone.action => (AninagColors.brand, Colors.white),
+      StatusTone.pending => (FmtColors.blueTint, FmtColors.blue),
+      StatusTone.progress => (FmtColors.amberTint, FmtColors.amber),
+      StatusTone.resolved => (FmtColors.greenTint, FmtColors.green),
+      StatusTone.alert => (FmtColors.redTint, FmtColors.red),
+      StatusTone.action => (FmtColors.brand, Colors.white),
     };
 
 class StatusChip extends StatelessWidget {
@@ -31,12 +31,12 @@ class StatusChip extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AninagSpace.sm,
-        vertical: AninagSpace.xs,
+        horizontal: FmtSpace.sm,
+        vertical: FmtSpace.xs,
       ),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(AninagRadius.pill),
+        borderRadius: BorderRadius.circular(FmtRadius.pill),
       ),
       child: Text(
         label,

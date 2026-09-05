@@ -1,4 +1,4 @@
-name: aninag_citizen
+name: fixmytown_citizen
 description: A production-oriented Flutter starter using Riverpod and go_router.
 publish_to: 'none'
 version: 1.0.0+1

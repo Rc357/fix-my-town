@@ -1,9 +1,9 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:aninag_citizen/features/auth/data/auth_providers.dart';
-import 'package:aninag_citizen/features/auth/presentation/auth_controller.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
+import 'package:fixmytown_citizen/features/auth/presentation/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,25 +19,25 @@ class ProfileScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Profile')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.lg),
+          padding: const EdgeInsets.all(FmtSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: const EdgeInsets.all(AninagSpace.lg),
+                padding: const EdgeInsets.all(FmtSpace.lg),
                 decoration: BoxDecoration(
-                  color: AninagColors.surface,
-                  border: Border.all(color: AninagColors.line),
+                  color: FmtColors.surface,
+                  border: Border.all(color: FmtColors.line),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
                   children: [
                     const CircleAvatar(
                       radius: 24,
-                      backgroundColor: AninagColors.brandTint,
-                      child: Icon(Icons.person, color: AninagColors.brandInk),
+                      backgroundColor: FmtColors.brandTint,
+                      child: Icon(Icons.person, color: FmtColors.brandInk),
                     ),
-                    const SizedBox(width: AninagSpace.md),
+                    const SizedBox(width: FmtSpace.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class ProfileScreen extends ConsumerWidget {
                           Text(
                             user?.email ?? '',
                             style: const TextStyle(
-                              color: AninagColors.muted,
+                              color: FmtColors.muted,
                               fontSize: 12,
                             ),
                           ),
@@ -59,7 +59,7 @@ class ProfileScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: AninagSpace.xl),
+              const SizedBox(height: FmtSpace.xl),
               OutlineButton(
                 label: authAction.isLoading ? 'Signing out…' : 'Sign out',
                 onPressed: authAction.isLoading

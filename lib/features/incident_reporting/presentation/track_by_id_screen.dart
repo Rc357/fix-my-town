@@ -1,5 +1,5 @@
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,21 +35,21 @@ class _TrackByIdScreenState extends State<TrackByIdScreen> {
       appBar: AppBar(title: const Text('Track a report')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.lg),
+          padding: const EdgeInsets.all(FmtSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
                 'Enter the tracking ID you received when you submitted your report.',
               ),
-              const SizedBox(height: AninagSpace.md),
+              const SizedBox(height: FmtSpace.md),
               TextField(
                 controller: _controller,
                 textCapitalization: TextCapitalization.characters,
                 decoration: const InputDecoration(hintText: 'e.g. ANG-2WK9F3'),
                 onSubmitted: (_) => _track(),
               ),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               PrimaryButton(label: 'Track', onPressed: _track),
             ],
           ),

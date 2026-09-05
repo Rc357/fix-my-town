@@ -1,7 +1,7 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/aninag_button.dart';
-import 'package:aninag_citizen/app/widgets/workflow_timeline.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
+import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +15,7 @@ class SubmittedScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AninagSpace.xl),
+          padding: const EdgeInsets.all(FmtSpace.xl),
           child: Column(
             children: [
               const Spacer(),
@@ -23,28 +23,28 @@ class SubmittedScreen extends StatelessWidget {
                 width: 72,
                 height: 72,
                 decoration: const BoxDecoration(
-                  color: AninagColors.greenTint,
+                  color: FmtColors.greenTint,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.check_rounded,
-                  color: AninagColors.green,
+                  color: FmtColors.green,
                   size: 36,
                 ),
               ),
-              const SizedBox(height: AninagSpace.lg),
+              const SizedBox(height: FmtSpace.lg),
               const Text(
                 'Report submitted',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
               ),
-              const SizedBox(height: AninagSpace.sm),
+              const SizedBox(height: FmtSpace.sm),
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AninagSpace.md,
+                  horizontal: FmtSpace.md,
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: AninagColors.brandTint,
+                  color: FmtColors.brandTint,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -52,12 +52,12 @@ class SubmittedScreen extends StatelessWidget {
                   style: const TextStyle(
                     fontFeatures: [FontFeature.tabularFigures()],
                     fontWeight: FontWeight.w700,
-                    color: AninagColors.brandInk,
+                    color: FmtColors.brandInk,
                     letterSpacing: 0.5,
                   ),
                 ),
               ),
-              const SizedBox(height: AninagSpace.xl),
+              const SizedBox(height: FmtSpace.xl),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -65,7 +65,7 @@ class SubmittedScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
-              const SizedBox(height: AninagSpace.sm),
+              const SizedBox(height: FmtSpace.sm),
               WorkflowTimeline(
                 steps: const [
                   TimelineStepData(
@@ -88,7 +88,7 @@ class SubmittedScreen extends StatelessWidget {
                 label: 'Track this report',
                 onPressed: () => context.go('/reports/$trackingId'),
               ),
-              const SizedBox(height: AninagSpace.sm),
+              const SizedBox(height: FmtSpace.sm),
               OutlineButton(
                 label: 'Report another issue',
                 onPressed: () => context.go('/reports/new/category'),

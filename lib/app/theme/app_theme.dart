@@ -1,6 +1,6 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/theme/aninag_text_styles.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 
 /// A single, committed theme — not a light/dark pair. See
@@ -10,94 +10,94 @@ import 'package:flutter/material.dart';
 abstract final class AppTheme {
   static final theme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: AninagColors.paper,
+    scaffoldBackgroundColor: FmtColors.paper,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AninagColors.brand,
+      seedColor: FmtColors.brand,
       brightness: Brightness.light,
-      primary: AninagColors.brand,
+      primary: FmtColors.brand,
       onPrimary: Colors.white,
-      surface: AninagColors.surface,
-      onSurface: AninagColors.ink,
-      error: AninagColors.red,
+      surface: FmtColors.surface,
+      onSurface: FmtColors.ink,
+      error: FmtColors.red,
     ),
     textTheme: const TextTheme(
-      headlineMedium: AninagText.display,
-      titleMedium: AninagText.title,
-      bodyMedium: AninagText.body,
-      labelLarge: AninagText.label,
-      bodySmall: AninagText.caption,
+      headlineMedium: FmtText.display,
+      titleMedium: FmtText.title,
+      bodyMedium: FmtText.body,
+      labelLarge: FmtText.label,
+      bodySmall: FmtText.caption,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: AninagColors.paper,
-      foregroundColor: AninagColors.ink,
+      backgroundColor: FmtColors.paper,
+      foregroundColor: FmtColors.ink,
       elevation: 0,
       centerTitle: false,
-      titleTextStyle: AninagText.title,
+      titleTextStyle: FmtText.title,
     ),
     cardTheme: CardThemeData(
-      color: AninagColors.surface,
+      color: FmtColors.surface,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AninagRadius.card),
-        side: const BorderSide(color: AninagColors.line),
+        borderRadius: BorderRadius.circular(FmtRadius.card),
+        side: const BorderSide(color: FmtColors.line),
       ),
       margin: EdgeInsets.zero,
     ),
     dividerTheme: const DividerThemeData(
-      color: AninagColors.line,
+      color: FmtColors.line,
       thickness: 1,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AninagColors.surface,
-      labelStyle: const TextStyle(color: AninagColors.muted),
-      floatingLabelStyle: const TextStyle(color: AninagColors.brand),
+      fillColor: FmtColors.surface,
+      labelStyle: const TextStyle(color: FmtColors.muted),
+      floatingLabelStyle: const TextStyle(color: FmtColors.brand),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AninagRadius.button),
-        borderSide: const BorderSide(color: AninagColors.line),
+        borderRadius: BorderRadius.circular(FmtRadius.button),
+        borderSide: const BorderSide(color: FmtColors.line),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AninagRadius.button),
-        borderSide: const BorderSide(color: AninagColors.line),
+        borderRadius: BorderRadius.circular(FmtRadius.button),
+        borderSide: const BorderSide(color: FmtColors.line),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AninagRadius.button),
-        borderSide: const BorderSide(color: AninagColors.brand, width: 2),
+        borderRadius: BorderRadius.circular(FmtRadius.button),
+        borderSide: const BorderSide(color: FmtColors.brand, width: 2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AninagRadius.button),
-        borderSide: const BorderSide(color: AninagColors.red),
+        borderRadius: BorderRadius.circular(FmtRadius.button),
+        borderSide: const BorderSide(color: FmtColors.red),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: AninagColors.brand,
+        backgroundColor: FmtColors.brand,
         foregroundColor: Colors.white,
-        disabledBackgroundColor: AninagColors.line,
-        disabledForegroundColor: AninagColors.muted,
+        disabledBackgroundColor: FmtColors.line,
+        disabledForegroundColor: FmtColors.muted,
         minimumSize: const Size.fromHeight(48),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AninagRadius.button),
+          borderRadius: BorderRadius.circular(FmtRadius.button),
         ),
         textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AninagColors.brandInk,
+        foregroundColor: FmtColors.brandInk,
         minimumSize: const Size.fromHeight(48),
-        side: const BorderSide(color: AninagColors.brand, width: 1.4),
+        side: const BorderSide(color: FmtColors.brand, width: 1.4),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AninagRadius.button),
+          borderRadius: BorderRadius.circular(FmtRadius.button),
         ),
         textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
       ),
     ),
-    iconTheme: const IconThemeData(color: AninagColors.ink),
+    iconTheme: const IconThemeData(color: FmtColors.ink),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: AninagColors.surface,
-      selectedItemColor: AninagColors.brand,
-      unselectedItemColor: AninagColors.muted,
+      backgroundColor: FmtColors.surface,
+      selectedItemColor: FmtColors.brand,
+      unselectedItemColor: FmtColors.muted,
       type: BottomNavigationBarType.fixed,
     ),
   );

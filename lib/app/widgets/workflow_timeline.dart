@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:flutter/material.dart';
 
 enum TimelineStepState { done, current, pending }
@@ -45,16 +45,16 @@ class _TimelineRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dotColor = switch (step.state) {
-      TimelineStepState.done => AninagColors.green,
-      TimelineStepState.current => AninagColors.amber,
-      TimelineStepState.pending => AninagColors.line,
+      TimelineStepState.done => FmtColors.green,
+      TimelineStepState.current => FmtColors.amber,
+      TimelineStepState.pending => FmtColors.line,
     };
     final lineColor = step.state == TimelineStepState.done
-        ? AninagColors.green
-        : AninagColors.line;
+        ? FmtColors.green
+        : FmtColors.line;
     final titleColor = step.state == TimelineStepState.pending
-        ? AninagColors.muted
-        : AninagColors.ink;
+        ? FmtColors.muted
+        : FmtColors.ink;
 
     return IntrinsicHeight(
       child: Row(
@@ -72,7 +72,7 @@ class _TimelineRow extends StatelessWidget {
                   boxShadow: step.state == TimelineStepState.current
                       ? [
                           BoxShadow(
-                            color: AninagColors.amberTint,
+                            color: FmtColors.amberTint,
                             blurRadius: 0,
                             spreadRadius: 3,
                           ),
@@ -106,7 +106,7 @@ class _TimelineRow extends StatelessWidget {
                         step.subtitle!,
                         style: const TextStyle(
                           fontSize: 10,
-                          color: AninagColors.muted,
+                          color: FmtColors.muted,
                         ),
                       ),
                     ),

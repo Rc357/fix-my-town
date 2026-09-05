@@ -1,9 +1,9 @@
-import 'package:aninag_citizen/app/theme/aninag_colors.dart';
-import 'package:aninag_citizen/app/theme/aninag_spacing.dart';
-import 'package:aninag_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:aninag_citizen/features/auth/data/auth_providers.dart';
-import 'package:aninag_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:aninag_citizen/features/incident_reporting/presentation/widgets/report_list_tile.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
+import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Row(
           children: [
-            Icon(Icons.location_on, size: 18, color: AninagColors.brand),
+            Icon(Icons.location_on, size: 18, color: FmtColors.brand),
             SizedBox(width: 6),
             Flexible(
               child: Text(
@@ -46,9 +46,9 @@ class HomeScreen extends ConsumerWidget {
               Center(child: Text('Something went wrong: $error')),
           data: (reports) => ListView(
             padding: const EdgeInsets.fromLTRB(
-              AninagSpace.lg,
-              AninagSpace.lg,
-              AninagSpace.lg,
+              FmtSpace.lg,
+              FmtSpace.lg,
+              FmtSpace.lg,
               88,
             ),
             children: [
@@ -56,13 +56,13 @@ class HomeScreen extends ConsumerWidget {
                 'REPORTED NEARBY',
                 style: Theme.of(context).textTheme.labelLarge,
               ),
-              const SizedBox(height: AninagSpace.sm),
+              const SizedBox(height: FmtSpace.sm),
               if (reports.isEmpty)
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: AninagSpace.xl),
+                  padding: EdgeInsets.symmetric(vertical: FmtSpace.xl),
                   child: Text(
                     'No reports nearby yet.',
-                    style: TextStyle(color: AninagColors.muted),
+                    style: TextStyle(color: FmtColors.muted),
                   ),
                 )
               else
@@ -71,7 +71,7 @@ class HomeScreen extends ConsumerWidget {
                     report: report,
                     onTap: () => context.push('/reports/${report.id}'),
                   ),
-                  const SizedBox(height: AninagSpace.sm),
+                  const SizedBox(height: FmtSpace.sm),
                 ],
             ],
           ),
@@ -79,7 +79,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/reports/new/category'),
-        backgroundColor: AninagColors.brand,
+        backgroundColor: FmtColors.brand,
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text(
           'Report an issue',

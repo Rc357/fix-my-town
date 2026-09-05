@@ -1,4 +1,4 @@
-import 'package:aninag_citizen/app/config/app_config.dart';
+import 'package:fixmytown_citizen/app/config/app_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

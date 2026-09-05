@@ -1,6 +1,6 @@
-# Aninag Citizen
+# FixMyTown Citizen
 
-Project Aninag's Citizen app — report an incident, track it, confirm
+FixMyTown's Citizen app — report an incident, track it, confirm
 resolution (see [`../docs-mobile/`](../docs-mobile/README.md) for the full
 mobile documentation set this implements).
 
@@ -138,8 +138,8 @@ UI.
 
 ## Release checklist
 
-- [x] Bundle/application identifiers replaced (`com.aninag.citizen`) and app
-      display name set (`Aninag Citizen` / `DEV`/`STG` variants).
+- [x] Bundle/application identifiers replaced (`com.fixmytown.citizen`) and app
+      display name set (`FixMyTown Citizen` / `DEV`/`STG` variants).
 - Configure Android release signing through local or CI secrets.
 - Configure iOS schemes, bundle IDs, signing, and display names per flavor —
   the identifier above is set app-wide; per-flavor iOS schemes/configurations

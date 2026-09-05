@@ -1,7 +1,7 @@
-import 'package:aninag_citizen/app/widgets/report_card.dart';
-import 'package:aninag_citizen/app/widgets/status_chip.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report.dart';
-import 'package:aninag_citizen/features/incident_reporting/domain/report_category.dart';
+import 'package:fixmytown_citizen/app/widgets/report_card.dart';
+import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:flutter/material.dart';
 
 /// Maps a Report onto ReportCard consistently everywhere a report appears
