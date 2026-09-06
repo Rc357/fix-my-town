@@ -1,6 +1,9 @@
+import 'package:fixmytown_citizen/features/auth/domain/auth_exception.dart';
 import 'package:fixmytown_citizen/features/auth/presentation/auth_controller.dart';
+import 'package:fixmytown_citizen/features/auth/presentation/confirm_email_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +16,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  var _obscurePassword = true;
 
   @override
   void dispose() {
@@ -37,6 +41,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     ref.listen(authControllerProvider, (previous, next) {
       if (next case AsyncError(:final error)) {
+        if (error is EmailConfirmationRequiredException) {
+          showConfirmEmailDialog(context, error.email);
+          return;
+        }
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(SnackBar(content: Text(error.toString())));
@@ -80,10 +88,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         key: const Key('passwordField'),
                         controller: _passwordController,
                         autofillHints: const [AutofillHints.password],
-                        obscureText: true,
+                        obscureText: _obscurePassword,
                         onFieldSubmitted: (_) => _submit(),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Password',
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscurePassword
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                            ),
+                            tooltip: _obscurePassword
+                                ? 'Show password'
+                                : 'Hide password',
+                            onPressed: () => setState(
+                              () => _obscurePassword = !_obscurePassword,
+                            ),
+                          ),
                         ),
                         validator: (value) => (value?.length ?? 0) >= 8
                             ? null
@@ -107,6 +128,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         'Starter login: use any valid email and a password '
                         'with at least 8 characters.',
                         textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () => context.push('/signup'),
+                        child: const Text('New here? Create an account'),
                       ),
                     ],
                   ),

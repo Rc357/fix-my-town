@@ -13,6 +13,8 @@ abstract final class FmtSpace {
 abstract final class FmtRadius {
   static const tile = 13.0;
   static const card = 14.0;
-  static const button = 12.0;
+  // Buttons use `pill` (StadiumBorder) instead — this is only ever applied
+  // to form inputs. Value matches the reference app's input radius.
+  static const input = 8.0;
   static const pill = 999.0;
 }

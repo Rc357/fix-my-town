@@ -1,5 +1,6 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 
 /// `.map-box` from the mockup. A lightweight placeholder — grid + pin, no
@@ -60,7 +61,7 @@ class MapPreview extends StatelessWidget {
                           address!,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontSize: 10,
+                            fontSize: FmtFontSize.xs,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

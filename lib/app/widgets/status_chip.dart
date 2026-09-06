@@ -1,5 +1,6 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 
 /// The fixed set of semantic tones a status can render as — deliberately
@@ -41,7 +42,7 @@ class StatusChip extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 10.5,
+          fontSize: FmtFontSize.xs,
           fontWeight: FontWeight.w800,
           color: fg,
         ),

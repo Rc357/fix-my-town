@@ -1,5 +1,6 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
 import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
 import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
@@ -32,7 +33,7 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 24,
                       backgroundColor: FmtColors.brandTint,
                       child: Icon(Icons.person, color: FmtColors.brandInk),
@@ -42,19 +43,63 @@ class ProfileScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Verified Citizen',
-                            style: TextStyle(fontWeight: FontWeight.w800),
+                          Text(
+                            user?.username ?? 'Verified Citizen',
+                            style: const TextStyle(fontWeight: FontWeight.w800),
                           ),
                           Text(
                             user?.email ?? '',
                             style: const TextStyle(
                               color: FmtColors.muted,
-                              fontSize: 12,
+                              fontSize: FmtFontSize.md,
                             ),
                           ),
                         ],
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: FmtSpace.lg),
+              // FR-16.2 — off by default; this is the only place it can be
+              // turned on. What other users see is username-first regardless
+              // of this switch (AppUser.publicDisplayName handles the logic).
+              Container(
+                padding: const EdgeInsets.all(FmtSpace.lg),
+                decoration: BoxDecoration(
+                  color: FmtColors.surface,
+                  border: Border.all(color: FmtColors.line),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Show my real name',
+                            style: TextStyle(fontWeight: FontWeight.w800),
+                          ),
+                          Text(
+                            user?.realName == null
+                                ? 'Only available for Google/Facebook sign-in.'
+                                : 'Shown instead of your username to other citizens.',
+                            style: const TextStyle(
+                              color: FmtColors.muted,
+                              fontSize: FmtFontSize.md,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Switch(
+                      value: user?.showRealName ?? false,
+                      onChanged: user?.realName == null
+                          ? null
+                          : (value) => ref
+                                .read(authControllerProvider.notifier)
+                                .setShowRealName(value),
                     ),
                   ],
                 ),

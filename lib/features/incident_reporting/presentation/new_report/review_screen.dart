@@ -1,7 +1,9 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
 import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +38,9 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
   @override
   Widget build(BuildContext context) {
     final draft = ref.watch(newReportControllerProvider);
+    final categoriesAsync = ref.watch(categoriesProvider);
     final category = draft.categoryId != null
-        ? ReportCategories.byId(draft.categoryId!)
+        ? categoriesAsync.value?.byId(draft.categoryId!)
         : null;
 
     ref.listen(newReportControllerProvider, (previous, next) {
@@ -113,21 +116,23 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                                     category?.label ?? '',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w800,
-                                      fontSize: 13,
+                                      fontSize: FmtFontSize.lg,
                                     ),
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
                                     draft.formattedLocation,
                                     style: const TextStyle(
-                                      fontSize: 11,
+                                      fontSize: FmtFontSize.sm,
                                       color: FmtColors.muted,
                                     ),
                                   ),
-                                  const Text(
-                                    '1 photo attached',
-                                    style: TextStyle(
-                                      fontSize: 11,
+                                  Text(
+                                    draft.hasVideo
+                                        ? 'Video attached (${draft.videoDurationSeconds}s)'
+                                        : '${draft.photoPaths.length} photo${draft.photoPaths.length == 1 ? '' : 's'} attached',
+                                    style: const TextStyle(
+                                      fontSize: FmtFontSize.sm,
                                       color: FmtColors.muted,
                                     ),
                                   ),

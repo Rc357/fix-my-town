@@ -1,5 +1,6 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
 import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,10 @@ class SubmittedScreen extends StatelessWidget {
               const SizedBox(height: FmtSpace.lg),
               const Text(
                 'Report submitted',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(
+                  fontSize: FmtFontSize.xxl,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               const SizedBox(height: FmtSpace.sm),
               Container(
@@ -49,8 +53,8 @@ class SubmittedScreen extends StatelessWidget {
                 ),
                 child: Text(
                   trackingId,
-                  style: const TextStyle(
-                    fontFeatures: [FontFeature.tabularFigures()],
+                  style: TextStyle(
+                    fontFeatures: const [FontFeature.tabularFigures()],
                     fontWeight: FontWeight.w700,
                     color: FmtColors.brandInk,
                     letterSpacing: 0.5,

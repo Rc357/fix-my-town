@@ -1,5 +1,6 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 
 /// `.category-tile` from the mockup. The visual tile can stay compact, but
@@ -33,52 +34,60 @@ class CategoryTile extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
           child: Stack(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: FmtSpace.sm,
-                  horizontal: 2,
-                ),
-                decoration: BoxDecoration(
-                  color: selected
-                      ? FmtColors.brandTint
-                      : FmtColors.surface,
-                  border: Border.all(
-                    color: selected ? FmtColors.brand : FmtColors.line,
-                    width: selected ? 1.6 : 1,
+              // Positioned.fill so the visible card stretches to the full
+              // grid cell — without this, the Column's mainAxisSize.min
+              // let the card shrink to its content and sit pinned at the
+              // Stack's default top-left, leaving a dead gap below every
+              // tile that read as a broken/too-small grid.
+              Positioned.fill(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: FmtSpace.sm,
+                    horizontal: 2,
                   ),
-                  borderRadius: BorderRadius.circular(FmtRadius.tile),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 34,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        color: selected
-                            ? FmtColors.brand
-                            : FmtColors.brandTint,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        icon,
-                        size: 17,
-                        color: selected ? Colors.white : FmtColors.brandInk,
-                      ),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? FmtColors.brandTint
+                        : FmtColors.surface,
+                    border: Border.all(
+                      color: selected ? FmtColors.brand : FmtColors.line,
+                      width: selected ? 1.6 : 1,
                     ),
-                    const SizedBox(height: FmtSpace.xs + 2),
-                    Text(
-                      label,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontSize: 9.8,
-                        fontWeight: FontWeight.w700,
-                        color: FmtColors.ink,
-                        height: 1.2,
+                    borderRadius: BorderRadius.circular(FmtRadius.tile),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: selected
+                              ? FmtColors.brand
+                              : FmtColors.brandTint,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          icon,
+                          size: 17,
+                          color: selected ? Colors.white : FmtColors.brandInk,
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: FmtSpace.xs + 2),
+                      Text(
+                        label,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontSize: FmtFontSize.xs,
+                          fontWeight: FontWeight.w700,
+                          color: FmtColors.ink,
+                          height: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               if (isPriority)

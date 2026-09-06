@@ -53,3 +53,11 @@ app.*.map.json
 **/*.keystore
 **/google-services.json
 **/GoogleService-Info.plist
+
+.test_folder
+
+# Real production/staging config holds live Supabase/Firebase values once
+# filled in — keep them local-only. The matching .example files document the
+# required keys; copy one to drop the .example suffix and fill in real values.
+config/production.json
+config/staging.json

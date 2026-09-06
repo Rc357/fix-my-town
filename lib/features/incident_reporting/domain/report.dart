@@ -43,16 +43,30 @@ enum ReportStatus {
       this == ReportStatus.awaitingConfirmation;
 }
 
-class ReportPhotos {
-  const ReportPhotos({
-    this.citizenPhotoPath,
+/// Renamed from ReportPhotos — FR-20.2 made video an alternative to photo,
+/// so "Photos" stopped describing what this actually holds.
+class ReportMedia {
+  const ReportMedia({
+    this.citizenPhotoPaths = const [],
+    this.citizenVideoPath,
+    this.citizenVideoDurationSeconds,
     this.beforePhotoPath,
     this.afterPhotoPath,
   });
 
-  final String? citizenPhotoPath;
+  /// FR-1.2 — one or more photos. FR-20.2 — mutually exclusive with
+  /// citizenVideoPath in practice (a report has photos or a video, never
+  /// both), but both independently populatable rather than a sealed choice:
+  /// keeps this a plain data holder, and NewReportController is already the
+  /// single place that enforces "exactly one kind of media."
+  final List<String> citizenPhotoPaths;
+  final String? citizenVideoPath;
+  final int? citizenVideoDurationSeconds;
   final String? beforePhotoPath;
   final String? afterPhotoPath;
+
+  bool get hasPhotos => citizenPhotoPaths.isNotEmpty;
+  bool get hasVideo => citizenVideoPath != null;
 }
 
 class Report {
@@ -66,8 +80,11 @@ class Report {
     required this.address,
     required this.status,
     required this.createdAt,
-    this.photos = const ReportPhotos(),
+    this.media = const ReportMedia(),
     this.confirmationCount = 0,
+    this.verifiedAt,
+    this.supportCount = 0,
+    this.disputeCount = 0,
   });
 
   final String id;
@@ -79,10 +96,28 @@ class Report {
   final String address;
   final ReportStatus status;
   final DateTime createdAt;
-  final ReportPhotos photos;
+  final ReportMedia media;
   final int confirmationCount;
 
-  Report copyWith({ReportStatus? status}) => Report(
+  /// FR-5.5/FR-19.1 — set once by Barangay Staff's Verify action, never
+  /// cleared by later workflow states. Drives the "Verified" badge
+  /// (FR-19.1) — never derive verification from `status` (FR-19.3).
+  final DateTime? verifiedAt;
+  bool get isVerified => verifiedAt != null;
+
+  /// Aggregate reaction counts (FR-17.2) — visible to any viewer, embedded
+  /// here rather than fetched per-report so a feed of many reports doesn't
+  /// need a separate subscription per card. The *viewer's own* reaction is
+  /// deliberately not embedded — see myReactionForReportProvider.
+  final int supportCount;
+  final int disputeCount;
+
+  Report copyWith({
+    ReportStatus? status,
+    DateTime? verifiedAt,
+    int? supportCount,
+    int? disputeCount,
+  }) => Report(
     id: id,
     trackingId: trackingId,
     categoryId: categoryId,
@@ -92,8 +127,11 @@ class Report {
     address: address,
     status: status ?? this.status,
     createdAt: createdAt,
-    photos: photos,
+    media: media,
     confirmationCount: confirmationCount,
+    verifiedAt: verifiedAt ?? this.verifiedAt,
+    supportCount: supportCount ?? this.supportCount,
+    disputeCount: disputeCount ?? this.disputeCount,
   );
 }
 

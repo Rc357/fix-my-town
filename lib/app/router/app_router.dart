@@ -1,7 +1,9 @@
 import 'package:fixmytown_citizen/app/router/router_refresh_notifier.dart';
 import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
+import 'package:fixmytown_citizen/features/auth/presentation/choose_username_screen.dart';
 import 'package:fixmytown_citizen/features/auth/presentation/login_screen.dart';
 import 'package:fixmytown_citizen/features/auth/presentation/profile_screen.dart';
+import 'package:fixmytown_citizen/features/auth/presentation/signup_screen.dart';
 import 'package:fixmytown_citizen/features/auth/presentation/welcome_screen.dart';
 import 'package:fixmytown_citizen/features/home/presentation/home_screen.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/presentation/my_reports_screen.dart';
@@ -17,6 +19,8 @@ import 'package:go_router/go_router.dart';
 abstract final class AppRoutes {
   static const welcome = '/welcome';
   static const login = '/login';
+  static const signup = '/signup';
+  static const chooseUsername = '/choose-username';
   static const home = '/home';
   static const track = '/track';
   static const myReports = '/reports';
@@ -28,6 +32,11 @@ abstract final class AppRoutes {
 
   /// Requires signed-in access — a guest has no history to list (FR-1.1).
   static const _verifiedOnly = {myReports, profile};
+
+  /// Reachable regardless of the username-completion gate below — a signed-in
+  /// user with no username yet must be able to reach chooseUsername itself
+  /// and sign out, nothing else (FR-16.3).
+  static const _usernameGateExempt = {welcome, login, signup, chooseUsername};
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -38,11 +47,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     initialLocation: AppRoutes.welcome,
     refreshListenable: refreshNotifier,
     redirect: (context, state) {
-      final isSignedIn = repository.currentUser != null;
+      final user = repository.currentUser;
+      final isSignedIn = user != null;
       final path = state.matchedLocation;
 
       if (path == AppRoutes.login) return isSignedIn ? AppRoutes.home : null;
+      if (path == AppRoutes.signup) return isSignedIn ? AppRoutes.home : null;
       if (path == AppRoutes.welcome) return isSignedIn ? AppRoutes.home : null;
+      // FR-16.3 — a signed-in OAuth account with no username yet can't reach
+      // anything else until this completes. Checked before _verifiedOnly so
+      // it wins even on a route that would otherwise be allowed.
+      if (isSignedIn &&
+          user.needsUsername &&
+          !AppRoutes._usernameGateExempt.contains(path)) {
+        return AppRoutes.chooseUsername;
+      }
       if (AppRoutes._verifiedOnly.contains(path) && !isSignedIn) {
         return AppRoutes.login;
       }
@@ -56,6 +75,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.signup,
+        builder: (context, state) => const SignupScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.chooseUsername,
+        builder: (context, state) => const ChooseUsernameScreen(),
       ),
       GoRoute(
         path: AppRoutes.home,

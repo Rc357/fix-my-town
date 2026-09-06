@@ -2,33 +2,45 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
 
 /// A backend-free adapter — same pattern as InMemoryAuthRepository. Replace
 /// with an adapter over docs/08-api-specification.md's /reports endpoints
 /// once the NestJS API exists; nothing in presentation/domain should need
 /// to change when it's swapped in (see docs-mobile/05-state-and-data-layer.md).
+///
+/// [currentUserId] is a callback, not a direct AuthRepository dependency —
+/// keeps this feature's data layer decoupled from auth's, per the "explicit
+/// contract or provider" cross-feature rule (see README's Feature rules).
 class InMemoryReportRepository implements ReportRepository {
-  InMemoryReportRepository() {
+  InMemoryReportRepository({required String? Function() currentUserId})
+    : _currentUserId = currentUserId {
     _reports.addAll(_seed());
     _mineIds.addAll(_reports.map((r) => r.id));
   }
 
+  final String? Function() _currentUserId;
   final _reports = <Report>[];
   final _mineIds = <String>{};
   final _controller = StreamController<void>.broadcast();
   final _random = Random();
 
+  // reportId -> userId -> (kind, reason). Kept separate from _reports so a
+  // reaction never needs to touch the report's own identity/content fields —
+  // only the aggregate counts baked into the Report returned to callers.
+  final _reactions = <String, Map<String, (ReactionKind, String?)>>{};
+
   @override
   Stream<List<Report>> watchNearby() async* {
-    yield List.unmodifiable(_reports);
-    yield* _controller.stream.map((_) => List.unmodifiable(_reports));
+    yield _withCounts(_reports);
+    yield* _controller.stream.map((_) => _withCounts(_reports));
   }
 
   @override
   Stream<List<Report>> watchMine() async* {
     List<Report> mine() =>
-        _reports.where((r) => _mineIds.contains(r.id)).toList();
+        _withCounts(_reports.where((r) => _mineIds.contains(r.id)).toList());
     yield mine();
     yield* _controller.stream.map((_) => mine());
   }
@@ -37,7 +49,7 @@ class InMemoryReportRepository implements ReportRepository {
   Future<Report?> findById(String id) async {
     await Future<void>.delayed(const Duration(milliseconds: 150));
     for (final report in _reports) {
-      if (report.id == id) return report;
+      if (report.id == id) return _withCounts([report]).first;
     }
     return null;
   }
@@ -47,10 +59,55 @@ class InMemoryReportRepository implements ReportRepository {
     await Future<void>.delayed(const Duration(milliseconds: 300));
     final normalized = trackingId.trim().toUpperCase();
     for (final report in _reports) {
-      if (report.trackingId.toUpperCase() == normalized) return report;
+      if (report.trackingId.toUpperCase() == normalized) {
+        return _withCounts([report]).first;
+      }
     }
     return null;
   }
+
+  @override
+  Future<void> react(String reportId, ReactionKind kind, {String? reason}) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      throw StateError('Sign in before reacting to a report.');
+    }
+    if (kind == ReactionKind.dispute && (reason == null || reason.trim().isEmpty)) {
+      throw ArgumentError('A reason is required to dispute a report.');
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    (_reactions[reportId] ??= {})[userId] = (kind, reason);
+    _controller.add(null);
+  }
+
+  @override
+  Future<void> removeReaction(String reportId) async {
+    final userId = _currentUserId();
+    if (userId == null) return;
+    _reactions[reportId]?.remove(userId);
+    _controller.add(null);
+  }
+
+  @override
+  Future<ReactionKind?> myReaction(String reportId) async {
+    final userId = _currentUserId();
+    if (userId == null) return null;
+    return _reactions[reportId]?[userId]?.$1;
+  }
+
+  @override
+  Future<String> resolveMediaUrl(String path) async => path;
+
+  List<Report> _withCounts(List<Report> reports) => [
+    for (final report in reports)
+      report.copyWith(
+        supportCount: _countReactions(report.id, ReactionKind.support),
+        disputeCount: _countReactions(report.id, ReactionKind.dispute),
+      ),
+  ];
+
+  int _countReactions(String reportId, ReactionKind kind) =>
+      _reactions[reportId]?.values.where((r) => r.$1 == kind).length ?? 0;
 
   @override
   Future<Report> submit(NewReportDraft draft) async {
@@ -66,7 +123,11 @@ class InMemoryReportRepository implements ReportRepository {
       address: draft.address,
       status: ReportStatus.submitted,
       createdAt: DateTime.now(),
-      photos: ReportPhotos(citizenPhotoPath: draft.photoPath),
+      media: ReportMedia(
+        citizenPhotoPaths: draft.photoPaths,
+        citizenVideoPath: draft.videoPath,
+        citizenVideoDurationSeconds: draft.videoDurationSeconds,
+      ),
     );
     _reports.insert(0, report);
     _mineIds.add(id);
@@ -116,6 +177,9 @@ class InMemoryReportRepository implements ReportRepository {
       address: 'Purok 3, Brgy. San Isidro',
       status: ReportStatus.awaitingConfirmation,
       createdAt: DateTime.now().subtract(const Duration(days: 2)),
+      // Demo variety for the Verified badge (FR-19.1) — the other two seeds
+      // are left unverified.
+      verifiedAt: DateTime.now().subtract(const Duration(days: 1)),
     ),
     Report(
       id: 'seed-2',
@@ -128,6 +192,7 @@ class InMemoryReportRepository implements ReportRepository {
       address: 'Riverside St. cor. Rizal Ave.',
       status: ReportStatus.inProgress,
       createdAt: DateTime.now().subtract(const Duration(hours: 6)),
+      verifiedAt: DateTime.now().subtract(const Duration(hours: 5)),
     ),
     Report(
       id: 'seed-3',

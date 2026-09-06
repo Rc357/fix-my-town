@@ -16,6 +16,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // flutter_local_notifications requires this — it uses java.time APIs
+        // that need desugaring to run on API levels below 26.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
@@ -35,17 +38,17 @@ android {
             dimension = "environment"
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            resValue("string", "app_name", "DEV FixMyTown Citizen")
+            resValue("string", "app_name", "DEV FMT")
         }
         create("staging") {
             dimension = "environment"
             applicationIdSuffix = ".stg"
             versionNameSuffix = "-stg"
-            resValue("string", "app_name", "STG FixMyTown Citizen")
+            resValue("string", "app_name", "STG FMT")
         }
         create("production") {
             dimension = "environment"
-            resValue("string", "app_name", "FixMyTown Citizen")
+            resValue("string", "app_name", "FMT")
         }
     }
 
@@ -67,4 +70,8 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }

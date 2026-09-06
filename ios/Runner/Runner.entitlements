@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- aps-environment (Push Notifications) removed for now — a free/personal
+	     Apple ID development team cannot provision this capability at all
+	     ("Personal development teams... do not support the Push
+	     Notifications capability"). iOS push via FCM is blocked on getting a
+	     paid Apple Developer Program membership ($99/yr); restore this key
+	     (value "development" for testing, "production" for release builds)
+	     once that's in place. Android push is unaffected by this. -->
+</dict>
+</plist>

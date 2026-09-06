@@ -8,25 +8,11 @@ Future<void> main() =>
 Android — uses the "production" product flavor (bare app ID, no suffix,
 see android/app/build.gradle.kts):
 
-  flutter run \
-    --flavor production \
-    -t lib/main_production.dart \
-    --dart-define=APP_FLAVOR=production \
-    --dart-define=API_BASE_URL=https://api.example.com
+  flutter run --flavor production -t lib/main_production.dart --dart-define=APP_FLAVOR=production --dart-define=API_BASE_URL=https://api.example.com
 
-  flutter build apk \
-    --flavor production \
-    -t lib/main_production.dart \
-    --dart-define=APP_FLAVOR=production \
-    --dart-define=API_BASE_URL=https://api.example.com \
-    --obfuscate --split-debug-info=build/symbols
+  flutter build apk --flavor production -t lib/main_production.dart --dart-define=APP_FLAVOR=production --dart-define=API_BASE_URL=https://api.example.com --obfuscate --split-debug-info=build/symbols
 
-  flutter build appbundle \
-    --flavor production \
-    -t lib/main_production.dart \
-    --dart-define=APP_FLAVOR=production \
-    --dart-define=API_BASE_URL=https://api.example.com \
-    --obfuscate --split-debug-info=build/symbols
+  flutter build appbundle --flavor production -t lib/main_production.dart --dart-define=APP_FLAVOR=production --dart-define=API_BASE_URL=https://api.example.com --obfuscate --split-debug-info=build/symbols
 
   Release signing must be configured (key.properties) before this build
   is store-ready — see ../SETUP.md; it never silently falls back to
@@ -35,8 +21,5 @@ see android/app/build.gradle.kts):
 iOS — per-flavor Xcode schemes aren't set up yet (see ../SETUP.md); run
 against the default Runner scheme/configuration instead:
 
-  flutter run \
-    -t lib/main_production.dart \
-    --dart-define=APP_FLAVOR=production \
-    --dart-define=API_BASE_URL=https://api.example.com
+  flutter run -t lib/main_production.dart --dart-define=APP_FLAVOR=production --dart-define=API_BASE_URL=https://api.example.com
 */

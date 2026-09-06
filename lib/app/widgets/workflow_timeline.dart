@@ -1,4 +1,5 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 
 enum TimelineStepState { done, current, pending }
@@ -94,7 +95,7 @@ class _TimelineRow extends StatelessWidget {
                   Text(
                     step.title,
                     style: TextStyle(
-                      fontSize: 11.8,
+                      fontSize: FmtFontSize.lg,
                       fontWeight: FontWeight.w800,
                       color: titleColor,
                     ),
@@ -105,7 +106,7 @@ class _TimelineRow extends StatelessWidget {
                       child: Text(
                         step.subtitle!,
                         style: const TextStyle(
-                          fontSize: 10,
+                          fontSize: FmtFontSize.sm,
                           color: FmtColors.muted,
                         ),
                       ),

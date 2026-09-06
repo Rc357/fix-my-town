@@ -1,0 +1,54 @@
+import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
+import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/// FR-17.1's "support" reaction as a single-tap toggle — the feed-card
+/// equivalent of a like button. Deliberately doesn't handle "dispute" here:
+/// that requires a reason (FR-17.3), which doesn't fit a one-tap feed
+/// interaction — see report_detail_screen.dart's full reactions row for
+/// where dispute actually lives.
+class SupportButton extends ConsumerWidget {
+  const SupportButton({
+    required this.reportId,
+    required this.supportCount,
+    this.enabled = true,
+    super.key,
+  });
+
+  final String reportId;
+  final int supportCount;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final myReactionAsync = ref.watch(myReactionForReportProvider(reportId));
+    final isSupporting = myReactionAsync.value == ReactionKind.support;
+
+    Future<void> toggle() async {
+      final repository = ref.read(reportRepositoryProvider);
+      if (isSupporting) {
+        await repository.removeReaction(reportId);
+      } else {
+        await repository.react(reportId, ReactionKind.support);
+      }
+      ref.invalidate(myReactionForReportProvider(reportId));
+    }
+
+    final color = isSupporting ? FmtColors.brand : FmtColors.muted;
+    return TextButton.icon(
+      onPressed: enabled ? toggle : null,
+      style: TextButton.styleFrom(foregroundColor: color, padding: EdgeInsets.zero),
+      icon: Icon(
+        isSupporting ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,
+        size: 18,
+        color: color,
+      ),
+      label: Text(
+        supportCount > 0 ? '$supportCount' : 'Support',
+        style: TextStyle(fontWeight: FontWeight.w700, color: color),
+      ),
+    );
+  }
+}

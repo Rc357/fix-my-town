@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>FixMyTown Citizen</string>
+	<string>$(APP_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,8 +28,27 @@
 	<string>FixMyTown needs your camera to take a photo of the issue you're reporting.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>FixMyTown uses your location to pin the report to the right spot and route it to the correct barangay.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>FixMyTown needs your microphone to record audio with the video of the issue you're reporting.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<!-- OAuth redirect (Google/Facebook via Supabase Auth, FR-16.1) — must
+	     match _oauthRedirectUrl in supabase_auth_repository.dart exactly. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>io.fixmytown.citizen.oauth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>io.fixmytown.citizen</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

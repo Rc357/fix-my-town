@@ -1,0 +1,15 @@
+# Generates android/app/src/main/res/mipmap-*/ic_launcher.png and
+# ios/Runner/Assets.xcassets/AppIcon.appiconset/* from the source logo.
+# Run after changing: dart run flutter_launcher_icons
+#
+# No adaptive_icon_foreground/background set on purpose — fmt-logo.png is
+# full-bleed with no safe-zone padding, so feeding it through Android's
+# adaptive-icon mask (circle/squircle/rounded-square, OS/launcher-dependent)
+# would clip the pin shape at the edges. This generates the classic
+# non-adaptive icon instead, matching what the app already had.
+flutter_launcher_icons:
+  image_path: "assets/icons/logo/fmt-logo.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  min_sdk_android: 21

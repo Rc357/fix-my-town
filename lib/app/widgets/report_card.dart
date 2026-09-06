@@ -1,6 +1,8 @@
 import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
+import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
+import 'package:fixmytown_citizen/app/widgets/verified_badge.dart';
 import 'package:flutter/material.dart';
 
 /// `.card` with `.stripe` from the mockup. The severity stripe is required,
@@ -15,6 +17,7 @@ class ReportCard extends StatelessWidget {
     required this.meta,
     required this.statusLabel,
     required this.statusTone,
+    this.isVerified = false,
     this.onTap,
     super.key,
   });
@@ -27,6 +30,7 @@ class ReportCard extends StatelessWidget {
   final String meta;
   final String statusLabel;
   final StatusTone statusTone;
+  final bool isVerified;
   final VoidCallback? onTap;
 
   @override
@@ -76,7 +80,7 @@ class ReportCard extends StatelessWidget {
                             child: Text(
                               title,
                               style: const TextStyle(
-                                fontSize: 13,
+                                fontSize: FmtFontSize.lg,
                                 fontWeight: FontWeight.w800,
                                 color: FmtColors.ink,
                               ),
@@ -91,11 +95,15 @@ class ReportCard extends StatelessWidget {
                       Text(
                         meta,
                         style: const TextStyle(
-                          fontSize: 11,
+                          fontSize: FmtFontSize.sm,
                           color: FmtColors.muted,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      if (isVerified) ...[
+                        const SizedBox(height: 4),
+                        const VerifiedBadge(),
+                      ],
                     ],
                   ),
                 ),

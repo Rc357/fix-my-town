@@ -1,10 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Report photo capture (docs-mobile/07-device-capabilities.md: capture-only, no gallery). -->
+    <!-- Report photo/video capture (docs-mobile/07-device-capabilities.md: capture-only,
+         no gallery). RECORD_AUDIO is for video's audio track (FR-20.2). -->
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!-- Report location + worker job-transition location. "When in use" only —
          no background location permission requested; see docs-mobile/07. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Required on API 33+ to actually show a notification for incoming
+         FCM messages — see features/notifications/data/push_notification_service.dart. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:label="@string/app_name"
         android:name="${applicationName}"
@@ -29,6 +34,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- OAuth redirect (Google/Facebook via Supabase Auth, FR-16.1) —
+                 must match _oauthRedirectUrl in supabase_auth_repository.dart
+                 exactly, or the browser redirect never reaches the app. -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="io.fixmytown.citizen" android:host="login-callback"/>
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

@@ -31,7 +31,7 @@ void main() {
 
     expect(find.text('FixMyTown'), findsOneWidget);
 
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.text('Sign in with email'));
     await tester.pumpAndSettle();
 
     expect(find.text('Welcome back'), findsOneWidget);
