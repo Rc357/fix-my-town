@@ -85,11 +85,24 @@ class SupabaseReportRepository implements ReportRepository {
 
   @override
   Future<Report?> findById(String id) async {
-    final row = await _client
-        .from(_table)
-        .select(_attachmentSelect)
-        .eq('id', id)
-        .maybeSingle();
+    Map<String, dynamic>? row;
+    try {
+      row = await _client
+          .from(_table)
+          .select(_attachmentSelect)
+          .eq('id', id)
+          .maybeSingle();
+    } on PostgrestException catch (error) {
+      // 22P02 = invalid_text_representation — `id` is a `uuid` column, and
+      // reportByAnyIdProvider always tries findById first regardless of
+      // whether it was actually given a tracking ID (e.g. "FMT-3786ED")
+      // rather than a real id. Postgres rejects that at the SQL level
+      // instead of just finding no match, so this has to be treated the
+      // same as "not found by id" — the ?? findByTrackingId(...) fallback
+      // depends on that, not on this ever throwing.
+      if (error.code == '22P02') return null;
+      rethrow;
+    }
     if (row == null) return null;
     return _withReactionCounts(_toReport(row, withAttachments: true));
   }
