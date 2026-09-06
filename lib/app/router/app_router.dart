@@ -13,6 +13,7 @@ import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_r
 import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/submitted_screen.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/presentation/report_detail_screen.dart';
 import 'package:fixmytown_citizen/features/incident_reporting/presentation/track_by_id_screen.dart';
+import 'package:fixmytown_citizen/features/notifications/presentation/notifications_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,14 +25,17 @@ abstract final class AppRoutes {
   static const home = '/home';
   static const track = '/track';
   static const myReports = '/reports';
+  static const notifications = '/notifications';
   static const profile = '/profile';
   static const newReportCategory = '/reports/new/category';
   static const newReportCapture = '/reports/new/capture';
   static const newReportReview = '/reports/new/review';
   static const newReportSubmitted = '/reports/new/submitted';
 
-  /// Requires signed-in access — a guest has no history to list (FR-1.1).
-  static const _verifiedOnly = {myReports, profile};
+  /// Requires signed-in access — a guest has no history to list (FR-1.1),
+  /// and no notifications either (nothing to notify a user_account-less
+  /// account about).
+  static const _verifiedOnly = {myReports, notifications, profile};
 
   /// Reachable regardless of the username-completion gate below — a signed-in
   /// user with no username yet must be able to reach chooseUsername itself
@@ -99,6 +103,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.myReports,
         builder: (context, state) => const MyReportsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.notifications,
+        builder: (context, state) => const NotificationsScreen(),
       ),
       GoRoute(
         path: AppRoutes.newReportCategory,

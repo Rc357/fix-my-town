@@ -160,9 +160,11 @@ class ReportFeedPost extends ConsumerWidget {
                             Icons.mode_comment_outlined,
                             size: 18,
                           ),
-                          label: const Text(
-                            'Comment',
-                            style: TextStyle(fontWeight: FontWeight.w700),
+                          label: Text(
+                            report.commentCount > 0
+                                ? '${report.commentCount}'
+                                : 'Comment',
+                            style: const TextStyle(fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),

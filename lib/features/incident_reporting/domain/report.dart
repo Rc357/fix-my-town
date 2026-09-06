@@ -85,6 +85,7 @@ class Report {
     this.verifiedAt,
     this.supportCount = 0,
     this.disputeCount = 0,
+    this.commentCount = 0,
   });
 
   final String id;
@@ -112,11 +113,18 @@ class Report {
   final int supportCount;
   final int disputeCount;
 
+  /// Same reasoning as supportCount/disputeCount — batched alongside them
+  /// (see SupabaseReportRepository._withBatchedReactionCounts) rather than
+  /// fetched per-card, which is exactly the N+1 query pattern that method
+  /// already exists to avoid.
+  final int commentCount;
+
   Report copyWith({
     ReportStatus? status,
     DateTime? verifiedAt,
     int? supportCount,
     int? disputeCount,
+    int? commentCount,
   }) => Report(
     id: id,
     trackingId: trackingId,
@@ -132,6 +140,7 @@ class Report {
     verifiedAt: verifiedAt ?? this.verifiedAt,
     supportCount: supportCount ?? this.supportCount,
     disputeCount: disputeCount ?? this.disputeCount,
+    commentCount: commentCount ?? this.commentCount,
   );
 }
 

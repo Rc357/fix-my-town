@@ -6,6 +6,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// `report_comment.user_id` has no FK to a denormalized username column, so
 /// this joins `user_account` for the author's public identity on every read
 /// — never `display_name`, always `username` (FR-16.2).
+///
+/// The join must use `user_account!report_comment_user_id_fkey(...)`, not a
+/// bare `user_account(...)` — `report_comment` has a *second* FK into
+/// user_account (`hidden_by_user_id`), so PostgREST can't infer which
+/// relationship to embed without the explicit constraint name (PGRST201,
+/// "more than one relationship was found").
 class SupabaseCommentRepository implements CommentRepository {
   SupabaseCommentRepository(this._client);
 
@@ -13,23 +19,20 @@ class SupabaseCommentRepository implements CommentRepository {
   static const _table = 'report_comment';
 
   @override
-  Stream<List<Comment>> watchComments(String reportId) {
-    // Realtime .stream() can't embed the user_account join a comment needs
-    // for its author's username, so this re-fetches (with the join) on every
-    // change notification instead of mapping the streamed rows directly —
-    // less elegant than a single realtime pipe, but correct.
-    return _client
-        .from(_table)
-        .stream(primaryKey: ['id'])
-        .eq('report_id', reportId)
-        .order('created_at')
-        .asyncMap((_) => _fetchWithAuthors(reportId));
-  }
+  Stream<List<Comment>> watchComments(String reportId) =>
+      // A one-shot fetch wrapped in a Stream, not realtime .stream() — same
+      // reliability fix applied to SupabaseNotificationRepository: a
+      // realtime channel that never confirms its subscription just never
+      // emits, with no timeout, which is exactly what left this section
+      // stuck on a loading spinner. report_detail_screen.dart invalidates
+      // commentsForReportProvider after posting a comment to make the new
+      // one show up immediately, since there's no push update anymore.
+      Stream.fromFuture(_fetchWithAuthors(reportId));
 
   Future<List<Comment>> _fetchWithAuthors(String reportId) async {
     final rows = await _client
         .from(_table)
-        .select('*, user_account(username)')
+        .select('*, user_account!report_comment_user_id_fkey(username)')
         .eq('report_id', reportId)
         .eq('is_hidden', false)
         .order('created_at');
@@ -48,7 +51,7 @@ class SupabaseCommentRepository implements CommentRepository {
     final inserted = await _client
         .from(_table)
         .insert({'report_id': reportId, 'user_id': userId, 'body': body.trim()})
-        .select('*, user_account(username)')
+        .select('*, user_account!report_comment_user_id_fkey(username)')
         .single();
     return _toComment(inserted);
   }

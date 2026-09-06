@@ -195,9 +195,11 @@ class _ReportDetailBody extends ConsumerWidget {
   }
 }
 
-/// FR-17 — support/dispute. Requires being signed in; a Guest sees the
-/// counts (FR-17.2) but the buttons are disabled with an explanatory label
-/// rather than hidden, so the feature is discoverable.
+/// FR-17 — support/dispute, displayed as "Bump"/"Debump" (Reddit/Stack
+/// Overflow-style vote wording) — a UI label choice only, ReactionKind.
+/// support/dispute and the DB values stay as-is. Requires being signed in;
+/// a Guest sees the counts (FR-17.2) but the buttons are disabled with an
+/// explanatory label rather than hidden, so the feature is discoverable.
 class _ReactionsRow extends ConsumerWidget {
   const _ReactionsRow({required this.report});
 
@@ -227,7 +229,7 @@ class _ReactionsRow extends ConsumerWidget {
         Expanded(
           child: _ReactionButton(
             icon: Icons.thumb_up_alt_outlined,
-            label: 'Support',
+            label: 'Bump',
             count: report.supportCount,
             active: myReaction == ReactionKind.support,
             onPressed: isSignedIn ? () => react(ReactionKind.support) : null,
@@ -237,7 +239,7 @@ class _ReactionsRow extends ConsumerWidget {
         Expanded(
           child: _ReactionButton(
             icon: Icons.flag_outlined,
-            label: 'Dispute',
+            label: 'Debump',
             count: report.disputeCount,
             active: myReaction == ReactionKind.dispute,
             onPressed: isSignedIn ? () => react(ReactionKind.dispute) : null,
@@ -252,7 +254,7 @@ class _ReactionsRow extends ConsumerWidget {
     return showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Why do you dispute this report?'),
+        title: const Text('Why are you debumping this report?'),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -456,6 +458,10 @@ class _CommentComposerState extends ConsumerState<_CommentComposer> {
           .read(commentRepositoryProvider)
           .postComment(widget.reportId, _controller.text);
       _controller.clear();
+      // No push update since watchComments is now a one-shot fetch (see
+      // SupabaseCommentRepository) — refetch explicitly so the new comment
+      // actually shows up.
+      ref.invalidate(commentsForReportProvider(widget.reportId));
     } finally {
       if (mounted) setState(() => _submitting = false);
     }

@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// FR-17.1's "support" reaction as a single-tap toggle — the feed-card
-/// equivalent of a like button. Deliberately doesn't handle "dispute" here:
-/// that requires a reason (FR-17.3), which doesn't fit a one-tap feed
-/// interaction — see report_detail_screen.dart's full reactions row for
-/// where dispute actually lives.
+/// equivalent of a like button. Displayed as "Bump" (Reddit/Stack Overflow-
+/// style vote wording) — a UI label choice only, the underlying
+/// ReactionKind.support/DB value stay as "support" so nothing here needs a
+/// data migration. Deliberately doesn't handle "dispute" here: that requires
+/// a reason (FR-17.3), which doesn't fit a one-tap feed interaction — see
+/// report_detail_screen.dart's full reactions row for where dispute
+/// ("Debump") actually lives.
 class SupportButton extends ConsumerWidget {
   const SupportButton({
     required this.reportId,
@@ -46,7 +49,7 @@ class SupportButton extends ConsumerWidget {
         color: color,
       ),
       label: Text(
-        supportCount > 0 ? '$supportCount' : 'Support',
+        supportCount > 0 ? '$supportCount' : 'Bump',
         style: TextStyle(fontWeight: FontWeight.w700, color: color),
       ),
     );

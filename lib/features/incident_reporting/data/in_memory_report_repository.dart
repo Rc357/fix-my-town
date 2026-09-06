@@ -98,6 +98,10 @@ class InMemoryReportRepository implements ReportRepository {
   @override
   Future<String> resolveMediaUrl(String path) async => path;
 
+  // commentCount stays at its Report(...) default (0) here — comments live
+  // in the separate InMemoryCommentRepository, which this class has no
+  // reference to. Not worth wiring two independent demo stores together
+  // just for a count only the no-backend demo path would ever show wrong.
   List<Report> _withCounts(List<Report> reports) => [
     for (final report in reports)
       report.copyWith(

@@ -54,31 +54,45 @@ class SupabaseReportRepository implements ReportRepository {
     final reports = [
       for (final row in rows) _toReport(row, withAttachments: true),
     ];
-    return _withBatchedReactionCounts(reports);
+    return _withBatchedCounts(reports);
   }
 
-  /// One query for every report's reaction counts, not one query per report
-  /// — the latter is what findById/_withReactionCounts does, fine for a
+  /// One query per aggregate for every report on the page, not one query
+  /// per report — the latter is what findById/_withCounts does, fine for a
   /// single detail view, wasteful across a whole feed page.
-  Future<List<Report>> _withBatchedReactionCounts(List<Report> reports) async {
+  Future<List<Report>> _withBatchedCounts(List<Report> reports) async {
     if (reports.isEmpty) return reports;
-    final rows = await _client
+    final reportIds = reports.map((r) => r.id).toList();
+
+    final reactionRows = await _client
         .from('report_reaction')
         .select('report_id, reaction_kind')
-        .inFilter('report_id', reports.map((r) => r.id).toList());
-
+        .inFilter('report_id', reportIds);
     final support = <String, int>{};
     final dispute = <String, int>{};
-    for (final row in rows) {
+    for (final row in reactionRows) {
       final id = row['report_id'] as String;
       final counts = row['reaction_kind'] == 'support' ? support : dispute;
       counts[id] = (counts[id] ?? 0) + 1;
     }
+
+    final commentRows = await _client
+        .from('report_comment')
+        .select('report_id')
+        .eq('is_hidden', false)
+        .inFilter('report_id', reportIds);
+    final comments = <String, int>{};
+    for (final row in commentRows) {
+      final id = row['report_id'] as String;
+      comments[id] = (comments[id] ?? 0) + 1;
+    }
+
     return [
       for (final report in reports)
         report.copyWith(
           supportCount: support[report.id] ?? 0,
           disputeCount: dispute[report.id] ?? 0,
+          commentCount: comments[report.id] ?? 0,
         ),
     ];
   }
@@ -104,7 +118,7 @@ class SupabaseReportRepository implements ReportRepository {
       rethrow;
     }
     if (row == null) return null;
-    return _withReactionCounts(_toReport(row, withAttachments: true));
+    return _withCounts(_toReport(row, withAttachments: true));
   }
 
   @override
@@ -115,7 +129,7 @@ class SupabaseReportRepository implements ReportRepository {
         .eq('tracking_id', trackingId.trim().toUpperCase())
         .maybeSingle();
     if (row == null) return null;
-    return _withReactionCounts(_toReport(row, withAttachments: true));
+    return _withCounts(_toReport(row, withAttachments: true));
   }
 
   @override
@@ -303,26 +317,35 @@ class SupabaseReportRepository implements ReportRepository {
       media: resolvedMedia,
       confirmationCount: (row['confirmation_count'] as int?) ?? 0,
       verifiedAt: verifiedAtRaw == null ? null : DateTime.parse(verifiedAtRaw),
-      // Reaction counts are populated by findById/findByTrackingId's caller
-      // via _withReactionCounts below, not here — realtime .stream() (used
-      // by watchNearby/watchMine) can't aggregate, so list-view cards show 0
-      // for now. Known limitation, not silently pretended away: FR-17.2
-      // technically wants counts on the feed too.
+      // Reaction/comment counts are populated by the caller afterward — see
+      // _withCounts (single report) and _withBatchedCounts (a feed page),
+      // not here.
     );
   }
 
-  Future<Report> _withReactionCounts(Report report) async {
-    final rows = await _client
+  Future<Report> _withCounts(Report report) async {
+    final reactionRows = await _client
         .from('report_reaction')
         .select('reaction_kind')
         .eq('report_id', report.id);
     var support = 0;
     var dispute = 0;
-    for (final row in rows) {
+    for (final row in reactionRows) {
       if (row['reaction_kind'] == 'support') support++;
       if (row['reaction_kind'] == 'dispute') dispute++;
     }
-    return report.copyWith(supportCount: support, disputeCount: dispute);
+
+    final commentRows = await _client
+        .from('report_comment')
+        .select('id')
+        .eq('report_id', report.id)
+        .eq('is_hidden', false);
+
+    return report.copyWith(
+      supportCount: support,
+      disputeCount: dispute,
+      commentCount: commentRows.length,
+    );
   }
 
   ReportMedia _mediaFrom(List<dynamic>? attachments) {
