@@ -1,4 +1,4 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
 
 /// Vendor-independent contract — same pattern as ReportRepository/
 /// AuthRepository (see features/auth/domain/auth_repository.dart).

@@ -1,13 +1,13 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/widgets/category_tile.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/widgets/category_tile.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/app/widgets/stepper_dots.dart';
+import 'package:obserba/features/incident_reporting/data/category_providers.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 
 class CategoryScreen extends ConsumerWidget {
   const CategoryScreen({super.key});
@@ -22,19 +22,19 @@ class CategoryScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text("What's the issue?")),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.lg),
+          padding: const EdgeInsets.all(ObsSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StepperDots(total: 3, currentIndex: 0),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               Expanded(
                 child: categoriesAsync.when(
                   loading: () => const Center(child: CircularProgressIndicator()),
                   error: (error, stackTrace) => Center(
                     child: Text(
                       "Couldn't load categories: $error",
-                      style: const TextStyle(color: FmtColors.muted),
+                      style: TextStyle(color: ObsColors.muted),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -42,8 +42,8 @@ class CategoryScreen extends ConsumerWidget {
                     itemCount: categories.length,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      mainAxisSpacing: FmtSpace.sm,
-                      crossAxisSpacing: FmtSpace.sm,
+                      mainAxisSpacing: ObsSpace.sm,
+                      crossAxisSpacing: ObsSpace.sm,
                       childAspectRatio: 0.92,
                     ),
                     itemBuilder: (context, index) {
@@ -59,7 +59,7 @@ class CategoryScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               PrimaryButton(
                 label: 'Next',
                 onPressed: draft.hasCategory

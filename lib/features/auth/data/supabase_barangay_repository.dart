@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/auth/domain/barangay.dart';
-import 'package:fixmytown_citizen/features/auth/domain/barangay_repository.dart';
+import 'package:obserba/features/auth/domain/barangay.dart';
+import 'package:obserba/features/auth/domain/barangay_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Backed by the `barangay` table (.test_folder/supabase-setup-guide.md

@@ -1,8 +1,8 @@
-import 'package:fixmytown_citizen/features/auth/domain/auth_exception.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/auth_controller.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/confirm_email_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/features/auth/domain/auth_exception.dart';
+import 'package:obserba/features/auth/presentation/auth_controller.dart';
+import 'package:obserba/features/auth/presentation/confirm_email_dialog.dart';
 
 /// Email/password signup collects the username directly (FR-16.4) — unlike
 /// Google/Facebook, which route through ChooseUsernameScreen post-auth

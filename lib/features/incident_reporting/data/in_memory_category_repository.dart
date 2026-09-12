@@ -1,6 +1,6 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/category_repository.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/features/incident_reporting/domain/category_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
 
 /// Demo data for when there's no Supabase backend configured — same role as
 /// InMemoryReportRepository/InMemoryAuthRepository. Not the real 25-category

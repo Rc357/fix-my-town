@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/features/incident_reporting/data/report_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
 
 /// Renders whichever of photos/video a report has (FR-20.2 — never both).
 /// Shared by ReportFeedPost and the detail screen so a report's media only
@@ -69,13 +69,13 @@ class _PhotoPagerState extends State<_PhotoPager> {
         ),
         if (widget.paths.length > 1) ...[
           Positioned(
-            top: FmtSpace.sm,
-            right: FmtSpace.sm,
+            top: ObsSpace.sm,
+            right: ObsSpace.sm,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
                 color: Colors.black.withValues(alpha: 0.55),
-                borderRadius: BorderRadius.circular(FmtRadius.pill),
+                borderRadius: BorderRadius.circular(ObsRadius.pill),
               ),
               child: Text(
                 '${_page + 1}/${widget.paths.length}',
@@ -84,7 +84,7 @@ class _PhotoPagerState extends State<_PhotoPager> {
             ),
           ),
           Positioned(
-            bottom: FmtSpace.sm,
+            bottom: ObsSpace.sm,
             left: 0,
             right: 0,
             child: Row(
@@ -122,7 +122,7 @@ class _ResolvedPhoto extends ConsumerWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Container(
-            color: FmtColors.line,
+            color: ObsColors.line,
             alignment: Alignment.center,
             child: const CircularProgressIndicator(),
           );
@@ -150,13 +150,13 @@ class _VideoPlaceholder extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: height,
-      color: FmtColors.ink,
+      color: ObsColors.ink,
       alignment: Alignment.center,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.play_circle_fill, size: 48, color: Colors.white),
-          const SizedBox(height: FmtSpace.xs),
+          const SizedBox(height: ObsSpace.xs),
           Text(
             '${seconds}s video',
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),

@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/comment.dart';
+import 'package:obserba/features/incident_reporting/domain/comment_repository.dart';
 
 /// Backend-free adapter, same pattern as InMemoryReportRepository. Flagging
 /// is accepted but goes nowhere — there's no Barangay Staff review-queue UI
 /// in this app to surface it to (see Comment.isHidden's doc comment).
 class InMemoryCommentRepository implements CommentRepository {
   InMemoryCommentRepository({
-    required String? Function() currentUserId,
-    required String? Function() currentUsername,
-  }) : _currentUserId = currentUserId,
-       _currentUsername = currentUsername;
+    required this._currentUserId,
+    required this._currentUsername,
+  });
 
   final String? Function() _currentUserId;
   final String? Function() _currentUsername;

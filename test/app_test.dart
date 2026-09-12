@@ -1,15 +1,19 @@
-import 'package:fixmytown_citizen/app/app.dart';
-import 'package:fixmytown_citizen/app/config/app_config.dart';
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
-import 'package:fixmytown_citizen/features/auth/data/in_memory_auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:obserba/app/app.dart';
+import 'package:obserba/app/config/app_config.dart';
+import 'package:obserba/app/theme/theme_mode_controller.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
+import 'package:obserba/features/auth/data/in_memory_auth_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   testWidgets('sign-in flow reaches the home screen', (tester) async {
     final repository = InMemoryAuthRepository();
     addTearDown(repository.dispose);
+    SharedPreferences.setMockInitialValues({});
+    final sharedPreferences = await SharedPreferences.getInstance();
 
     await tester.pumpWidget(
       ProviderScope(
@@ -23,13 +27,14 @@ void main() {
             ),
           ),
           authRepositoryProvider.overrideWithValue(repository),
+          sharedPreferencesProvider.overrideWithValue(sharedPreferences),
         ],
         child: const App(),
       ),
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('FixMyTown'), findsOneWidget);
+    expect(find.text('Obserba'), findsOneWidget);
 
     await tester.tap(find.text('Sign in with email'));
     await tester.pumpAndSettle();

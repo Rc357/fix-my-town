@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:fixmytown_citizen/features/auth/domain/app_user.dart';
-import 'package:fixmytown_citizen/features/auth/domain/auth_exception.dart';
-import 'package:fixmytown_citizen/features/auth/domain/auth_repository.dart';
+import 'package:obserba/features/auth/domain/app_user.dart';
+import 'package:obserba/features/auth/domain/auth_exception.dart';
+import 'package:obserba/features/auth/domain/auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 /// Deep-link scheme OAuth providers redirect back to after the browser
 /// step — must match the native registration (AndroidManifest intent-filter,
 /// iOS CFBundleURLTypes) exactly, or the redirect never reaches the app.
-const _oauthRedirectUrl = 'io.fixmytown.citizen://login-callback';
+const _oauthRedirectUrl = 'io.obserba://login-callback';
 
 /// Backed by Supabase Auth + the `user_account` table (see
 /// .test_folder/supabase-setup-guide.md). `AppUser` carries more than the

@@ -1,13 +1,13 @@
-import 'package:fixmytown_citizen/app/config/app_config.dart';
-import 'package:fixmytown_citizen/features/auth/data/in_memory_auth_repository.dart';
-import 'package:fixmytown_citizen/features/auth/data/in_memory_barangay_repository.dart';
-import 'package:fixmytown_citizen/features/auth/data/supabase_auth_repository.dart';
-import 'package:fixmytown_citizen/features/auth/data/supabase_barangay_repository.dart';
-import 'package:fixmytown_citizen/features/auth/domain/app_user.dart';
-import 'package:fixmytown_citizen/features/auth/domain/auth_repository.dart';
-import 'package:fixmytown_citizen/features/auth/domain/barangay.dart';
-import 'package:fixmytown_citizen/features/auth/domain/barangay_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/config/app_config.dart';
+import 'package:obserba/features/auth/data/in_memory_auth_repository.dart';
+import 'package:obserba/features/auth/data/in_memory_barangay_repository.dart';
+import 'package:obserba/features/auth/data/supabase_auth_repository.dart';
+import 'package:obserba/features/auth/data/supabase_barangay_repository.dart';
+import 'package:obserba/features/auth/domain/app_user.dart';
+import 'package:obserba/features/auth/domain/auth_repository.dart';
+import 'package:obserba/features/auth/domain/barangay.dart';
+import 'package:obserba/features/auth/domain/barangay_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Real Supabase Auth once configured (see AppConfig.hasSupabase); falls

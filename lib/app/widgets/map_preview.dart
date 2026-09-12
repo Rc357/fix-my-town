@@ -1,7 +1,7 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
 
 /// `.map-box` from the mockup. A lightweight placeholder — grid + pin, no
 /// map SDK — so the app runs without a Google Maps API key. Real GPS
@@ -17,7 +17,7 @@ class MapPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(FmtRadius.card),
+      borderRadius: BorderRadius.circular(ObsRadius.card),
       child: SizedBox(
         height: height,
         width: double.infinity,
@@ -26,21 +26,21 @@ class MapPreview extends StatelessWidget {
           children: [
             Container(color: const Color(0xFFE4EDE9)),
             CustomPaint(painter: _GridPainter()),
-            const Center(
+            Center(
               child: Icon(
                 Icons.location_pin,
-                color: FmtColors.red,
+                color: ObsColors.red,
                 size: 30,
               ),
             ),
             if (address != null)
               Positioned(
-                left: FmtSpace.sm,
-                right: FmtSpace.sm,
-                bottom: FmtSpace.sm,
+                left: ObsSpace.sm,
+                right: ObsSpace.sm,
+                bottom: ObsSpace.sm,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: FmtSpace.sm,
+                    horizontal: ObsSpace.sm,
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
@@ -50,10 +50,10 @@ class MapPreview extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.place,
                         size: 12,
-                        color: FmtColors.brand,
+                        color: ObsColors.brand,
                       ),
                       const SizedBox(width: 5),
                       Flexible(
@@ -61,7 +61,7 @@ class MapPreview extends StatelessWidget {
                           address!,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontSize: FmtFontSize.xs,
+                            fontSize: ObsFontSize.xs,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -81,7 +81,7 @@ class _GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = FmtColors.brand.withValues(alpha: 0.08)
+      ..color = ObsColors.brand.withValues(alpha: 0.08)
       ..strokeWidth = 1;
     const step = 24.0;
     for (var x = 0.0; x < size.width; x += step) {

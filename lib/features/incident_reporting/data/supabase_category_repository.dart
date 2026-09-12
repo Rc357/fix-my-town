@@ -1,6 +1,6 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/category_repository.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/features/incident_reporting/domain/category_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Backed by report_category/category_group (see

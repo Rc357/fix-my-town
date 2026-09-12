@@ -1,11 +1,11 @@
-import 'package:fixmytown_citizen/app/config/app_config.dart';
-import 'package:fixmytown_citizen/features/notifications/data/in_memory_notification_repository.dart';
-import 'package:fixmytown_citizen/features/notifications/data/push_notification_service.dart';
-import 'package:fixmytown_citizen/features/notifications/data/supabase_notification_repository.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/app_notification.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/notification_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:obserba/app/config/app_config.dart';
+import 'package:obserba/features/notifications/data/in_memory_notification_repository.dart';
+import 'package:obserba/features/notifications/data/push_notification_service.dart';
+import 'package:obserba/features/notifications/data/supabase_notification_repository.dart';
+import 'package:obserba/features/notifications/domain/app_notification.dart';
+import 'package:obserba/features/notifications/domain/notification_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final pushNotificationServiceProvider = Provider<PushNotificationService>(

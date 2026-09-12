@@ -1,4 +1,4 @@
-import 'package:fixmytown_citizen/features/auth/domain/barangay.dart';
+import 'package:obserba/features/auth/domain/barangay.dart';
 
 /// Vendor-independent contract — same pattern as CategoryRepository/
 /// ReportRepository.

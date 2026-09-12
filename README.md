@@ -1,6 +1,6 @@
-# FixMyTown Citizen
+# Obserba Citizen
 
-FixMyTown's Citizen app — report an incident, track it, confirm
+Obserba's Citizen app — report an incident, track it, confirm
 resolution (see [`../docs-mobile/`](../docs-mobile/README.md) for the full
 mobile documentation set this implements).
 
@@ -43,7 +43,7 @@ flutter run
 ```
 
 Flavors — same commands on both Android and iOS now (each gets its own
-bundle/application ID and display name: `FMT`/`DEV FMT`/`STG FMT`, so all
+bundle/application ID and display name: `Obserba`/`DEV Obserba`/`STG Obserba`, so all
 three install side-by-side on one device):
 
 ```sh
@@ -181,9 +181,8 @@ UI.
 
 ## Release checklist
 
-- [x] Bundle/application identifiers replaced (`com.fixmytown.citizen`) and app
-      display name set (`FMT` / `DEV FMT`/`STG FMT` variants — shortened from
-      "FixMyTown Citizen" so the home-screen label doesn't truncate).
+- [x] Bundle/application identifiers replaced (`com.obserba`) and app display
+      name set (`Obserba` / `DEV Obserba`/`STG Obserba` variants).
 - Configure Android release signing through local or CI secrets.
 - [x] iOS per-flavor schemes/bundle IDs/display names configured (see the iOS
       flavor note under Run) — still needs release-mode code signing set up

@@ -1,7 +1,7 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
 
 /// The fixed set of semantic tones a status can render as — deliberately
 /// closed (not an arbitrary Color) so a screen can't invent an ad hoc status
@@ -13,11 +13,11 @@ enum StatusTone { pending, progress, resolved, alert, action }
 /// one status, one color, everywhere it appears on screen.
 (Color background, Color foreground) statusToneColors(StatusTone tone) =>
     switch (tone) {
-      StatusTone.pending => (FmtColors.blueTint, FmtColors.blue),
-      StatusTone.progress => (FmtColors.amberTint, FmtColors.amber),
-      StatusTone.resolved => (FmtColors.greenTint, FmtColors.green),
-      StatusTone.alert => (FmtColors.redTint, FmtColors.red),
-      StatusTone.action => (FmtColors.brand, Colors.white),
+      StatusTone.pending => (ObsColors.blueTint, ObsColors.blue),
+      StatusTone.progress => (ObsColors.amberTint, ObsColors.amber),
+      StatusTone.resolved => (ObsColors.greenTint, ObsColors.green),
+      StatusTone.alert => (ObsColors.redTint, ObsColors.red),
+      StatusTone.action => (ObsColors.brand, Colors.white),
     };
 
 class StatusChip extends StatelessWidget {
@@ -32,17 +32,17 @@ class StatusChip extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: FmtSpace.sm,
-        vertical: FmtSpace.xs,
+        horizontal: ObsSpace.sm,
+        vertical: ObsSpace.xs,
       ),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(FmtRadius.pill),
+        borderRadius: BorderRadius.circular(ObsRadius.pill),
       ),
       child: Text(
         label,
         style: TextStyle(
-          fontSize: FmtFontSize.xs,
+          fontSize: ObsFontSize.xs,
           fontWeight: FontWeight.w800,
           color: fg,
         ),

@@ -1,9 +1,9 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
 
-/// `FmtText` without this would have left most on-screen text untouched.
-abstract final class FmtFontSize {
+/// `ObsText` without this would have left most on-screen text untouched.
+abstract final class ObsFontSize {
   /// Smallest allowed anywhere — status chips, the Verified badge. Never go
   /// below this; older/low-vision users are exactly who a smaller-than-this
   /// size fails first.
@@ -34,55 +34,59 @@ abstract final class FmtFontSize {
 /// letterforms carry noticeably thicker strokes than Inter at the *same*
 /// nominal weight, which read as "still bold" even after dialing weights
 /// down — the font itself, not just the weight number, was the mismatch.
-/// `static final`, not `const`, below — `GoogleFonts.inter(...)` isn't a
-/// const constructor (it lazily registers/loads the font file on first
-/// use), so nothing referencing these fields can be `const` either (see
-/// AppTheme, which drops the `const` off its `TextTheme`/`AppBarTheme` for
-/// the same reason).
+/// `static get`, not `static final` — a `final` field memoizes on first
+/// access for the process lifetime, which would freeze these at whichever
+/// ObsColors.ink/.muted value was current the first time each was touched,
+/// never picking up a later dark-mode change. A getter re-evaluates every
+/// access instead, so it always reflects ObsColors' current brightness.
+/// `GoogleFonts.inter(...)` isn't a const constructor either way (it lazily
+/// registers/loads the font file on first use), so nothing referencing
+/// these fields can be `const` (see AppTheme, which drops the `const` off
+/// its `TextTheme`/`AppBarTheme` for the same reason).
 ///
 /// Weights also dialed back from an earlier pass (display/title/label were
 /// all w800, body w500) — heavy weight everywhere was a real contributor to
 /// the app reading as "too bold," independent of font choice. Bold is
 /// reserved for things that should stand out (titles, labels); body/caption
 /// read at a normal weight.
-abstract final class FmtText {
-  static final display = GoogleFonts.inter(
-    fontSize: FmtFontSize.display,
+abstract final class ObsText {
+  static TextStyle get display => GoogleFonts.inter(
+    fontSize: ObsFontSize.display,
     fontWeight: FontWeight.w700,
-    color: FmtColors.ink,
+    color: ObsColors.ink,
     letterSpacing: -0.1,
   );
 
-  static final title = GoogleFonts.inter(
-    fontSize: FmtFontSize.xxl,
+  static TextStyle get title => GoogleFonts.inter(
+    fontSize: ObsFontSize.xxl,
     fontWeight: FontWeight.w700,
-    color: FmtColors.ink,
+    color: ObsColors.ink,
   );
 
-  static final body = GoogleFonts.inter(
-    fontSize: FmtFontSize.xl,
+  static TextStyle get body => GoogleFonts.inter(
+    fontSize: ObsFontSize.xl,
     fontWeight: FontWeight.w400,
-    color: FmtColors.ink,
+    color: ObsColors.ink,
     height: 1.4,
   );
 
-  static final label = GoogleFonts.inter(
-    fontSize: FmtFontSize.sm,
+  static TextStyle get label => GoogleFonts.inter(
+    fontSize: ObsFontSize.sm,
     fontWeight: FontWeight.w700,
-    color: FmtColors.muted,
+    color: ObsColors.muted,
     letterSpacing: 0.6,
   );
 
-  static final caption = GoogleFonts.inter(
-    fontSize: FmtFontSize.sm,
+  static TextStyle get caption => GoogleFonts.inter(
+    fontSize: ObsFontSize.sm,
     fontWeight: FontWeight.w500,
-    color: FmtColors.muted,
+    color: ObsColors.muted,
   );
 
-  static final mono = GoogleFonts.inter(
-    fontSize: FmtFontSize.md,
+  static TextStyle get mono => GoogleFonts.inter(
+    fontSize: ObsFontSize.md,
     fontWeight: FontWeight.w700,
-    color: FmtColors.ink,
+    color: ObsColors.ink,
     fontFeatures: const [FontFeature.tabularFigures()],
   );
 }

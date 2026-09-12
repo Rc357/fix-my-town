@@ -1,8 +1,8 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/features/incident_reporting/data/report_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
 
 /// FR-17.1's "support" reaction as a single-tap toggle — the feed-card
 /// equivalent of a like button. Displayed as "Bump" (Reddit/Stack Overflow-
@@ -39,7 +39,7 @@ class SupportButton extends ConsumerWidget {
       ref.invalidate(myReactionForReportProvider(reportId));
     }
 
-    final color = isSupporting ? FmtColors.brand : FmtColors.muted;
+    final color = isSupporting ? ObsColors.brand : ObsColors.muted;
     return TextButton.icon(
       onPressed: enabled ? toggle : null,
       style: TextButton.styleFrom(foregroundColor: color, padding: EdgeInsets.zero),

@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:fixmytown_citizen/features/notifications/data/notification_providers.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/app_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/app_bottom_nav.dart';
+import 'package:obserba/features/notifications/data/notification_providers.dart';
+import 'package:obserba/features/notifications/domain/app_notification.dart';
 
 class NotificationsScreen extends ConsumerWidget {
   const NotificationsScreen({super.key});
@@ -24,16 +24,16 @@ class NotificationsScreen extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) => Center(
             child: Padding(
-              padding: const EdgeInsets.all(FmtSpace.xl),
+              padding: const EdgeInsets.all(ObsSpace.xl),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     "Couldn't load notifications: $error",
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: FmtColors.muted),
+                    style: TextStyle(color: ObsColors.muted),
                   ),
-                  const SizedBox(height: FmtSpace.md),
+                  const SizedBox(height: ObsSpace.md),
                   OutlinedButton(
                     onPressed: () => ref.invalidate(notificationsProvider),
                     child: const Text('Try again'),
@@ -50,16 +50,16 @@ class NotificationsScreen extends ConsumerWidget {
                     // works on an empty list — same reasoning as the home
                     // feed's empty state.
                     padding: const EdgeInsets.only(top: 120),
-                    children: const [
+                    children: [
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: FmtSpace.xl),
+                          padding: const EdgeInsets.symmetric(horizontal: ObsSpace.xl),
                           child: Text(
                             "You'll see activity on your reports here — "
                             'reactions, comments, verification, and status '
                             'updates.\n\nPull down to refresh.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: FmtColors.muted),
+                            style: TextStyle(color: ObsColors.muted),
                           ),
                         ),
                       ),
@@ -87,12 +87,12 @@ class _NotificationTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      tileColor: notification.isRead ? null : FmtColors.brandTint,
-      leading: Icon(_iconFor(notification.kind), color: FmtColors.brand),
-      title: Text(notification.body, style: const TextStyle(fontSize: FmtFontSize.lg)),
+      tileColor: notification.isRead ? null : ObsColors.brandTint,
+      leading: Icon(_iconFor(notification.kind), color: ObsColors.brand),
+      title: Text(notification.body, style: const TextStyle(fontSize: ObsFontSize.lg)),
       subtitle: Text(
         _relativeTime(notification.createdAt),
-        style: const TextStyle(fontSize: FmtFontSize.sm, color: FmtColors.muted),
+        style: TextStyle(fontSize: ObsFontSize.sm, color: ObsColors.muted),
       ),
       onTap: () async {
         await ref.read(notificationRepositoryProvider).markAsRead(notification.id);

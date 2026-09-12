@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:fixmytown_citizen/features/auth/domain/app_user.dart';
-import 'package:fixmytown_citizen/features/auth/domain/auth_exception.dart';
-import 'package:fixmytown_citizen/features/auth/domain/auth_repository.dart';
+import 'package:obserba/features/auth/domain/app_user.dart';
+import 'package:obserba/features/auth/domain/auth_exception.dart';
+import 'package:obserba/features/auth/domain/auth_repository.dart';
 
 /// A credential-free adapter that keeps this starter runnable.
 ///

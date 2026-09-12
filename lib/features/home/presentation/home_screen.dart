@@ -1,14 +1,14 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
-import 'package:fixmytown_citizen/features/auth/domain/barangay.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_feed_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/app_bottom_nav.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
+import 'package:obserba/features/auth/domain/barangay.dart';
+import 'package:obserba/features/incident_reporting/data/report_providers.dart';
+import 'package:obserba/features/incident_reporting/presentation/widgets/report_feed_post.dart';
 
 /// FR-20.1 — the scrollable feed is the primary citizen-facing surface now,
 /// not an incidental list. Pull-to-refresh (via ref.invalidate) is the
@@ -23,7 +23,7 @@ class HomeScreen extends ConsumerWidget {
     final isGuest = ref.watch(authRepositoryProvider).currentUser == null;
 
     return Scaffold(
-      backgroundColor: FmtColors.surface,
+      backgroundColor: ObsColors.surface,
       appBar: AppBar(
         title: const _BarangaySelector(),
         actions: [
@@ -48,26 +48,26 @@ class HomeScreen extends ConsumerWidget {
                     // works on an empty feed — RefreshIndicator needs a
                     // scrollable child to detect the pull gesture at all.
                     padding: const EdgeInsets.only(top: 120, bottom: 88),
-                    children: const [
+                    children: [
                       Center(
                         child: Text(
                           'No reports nearby yet.\nPull down to refresh.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: FmtColors.muted),
+                          style: TextStyle(color: ObsColors.muted),
                         ),
                       ),
                     ],
                   )
                 : ListView.separated(
                     padding: const EdgeInsets.fromLTRB(
-                      FmtSpace.md,
-                      FmtSpace.md,
-                      FmtSpace.md,
+                      ObsSpace.md,
+                      ObsSpace.md,
+                      ObsSpace.md,
                       88,
                     ),
                     itemCount: reports.length,
                     separatorBuilder: (context, index) =>
-                        const SizedBox(height: FmtSpace.md),
+                        const SizedBox(height: ObsSpace.md),
                     itemBuilder: (context, index) {
                       final report = reports[index];
                       return ReportFeedPost(
@@ -81,7 +81,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/reports/new/category'),
-        backgroundColor: FmtColors.brand,
+        backgroundColor: ObsColors.brand,
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text(
           'Report an issue',
@@ -106,17 +106,17 @@ class _BarangaySelector extends ConsumerWidget {
     final barangaysAsync = ref.watch(barangaysProvider);
 
     if (user == null) {
-      return const Row(
+      return Row(
         children: [
-          Icon(Icons.location_on_outlined, size: 18, color: FmtColors.muted),
-          SizedBox(width: 6),
+          Icon(Icons.location_on_outlined, size: 18, color: ObsColors.muted),
+          const SizedBox(width: 6),
           Flexible(
             child: Text(
               'Sign in to set your barangay',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: FmtFontSize.md,
-                color: FmtColors.muted,
+                fontSize: ObsFontSize.md,
+                color: ObsColors.muted,
               ),
             ),
           ),
@@ -139,10 +139,10 @@ class _BarangaySelector extends ConsumerWidget {
       onTap: () => _showBarangayPicker(context, ref),
       child: Row(
         children: [
-          const Icon(Icons.location_on, size: 18, color: FmtColors.brand),
+          Icon(Icons.location_on, size: 18, color: ObsColors.brand),
           const SizedBox(width: 6),
           Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
-          const Icon(Icons.expand_more, size: 18, color: FmtColors.muted),
+          Icon(Icons.expand_more, size: 18, color: ObsColors.muted),
         ],
       ),
     );
@@ -160,20 +160,20 @@ class _BarangaySelector extends ConsumerWidget {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (error, stackTrace) => Padding(
-              padding: const EdgeInsets.all(FmtSpace.lg),
+              padding: const EdgeInsets.all(ObsSpace.lg),
               child: Text("Couldn't load barangays: $error"),
             ),
             data: (barangays) => ListView(
               shrinkWrap: true,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(FmtSpace.md),
+                Padding(
+                  padding: const EdgeInsets.all(ObsSpace.md),
                   child: Text(
                     'SELECT YOUR BARANGAY',
                     style: TextStyle(
-                      fontSize: FmtFontSize.sm,
+                      fontSize: ObsFontSize.sm,
                       fontWeight: FontWeight.w700,
-                      color: FmtColors.muted,
+                      color: ObsColors.muted,
                       letterSpacing: 0.6,
                     ),
                   ),

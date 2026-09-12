@@ -41,7 +41,7 @@ class AppConfig {
       flavor: flavor,
       appName: const String.fromEnvironment(
         'APP_NAME',
-        defaultValue: 'FMT',
+        defaultValue: 'Obserba',
       ),
       apiBaseUrl: Uri.parse(
         configuredUrl.isEmpty ? _defaultApiUrl(flavor) : configuredUrl,

@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/domain/report_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Backed by the schema in .test_folder/supabase-setup-guide.md. A few
@@ -109,12 +109,20 @@ class SupabaseReportRepository implements ReportRepository {
     } on PostgrestException catch (error) {
       // 22P02 = invalid_text_representation — `id` is a `uuid` column, and
       // reportByAnyIdProvider always tries findById first regardless of
-      // whether it was actually given a tracking ID (e.g. "FMT-3786ED")
+      // whether it was actually given a tracking ID (e.g. "OBS-3786ED")
       // rather than a real id. Postgres rejects that at the SQL level
       // instead of just finding no match, so this has to be treated the
       // same as "not found by id" — the ?? findByTrackingId(...) fallback
       // depends on that, not on this ever throwing.
-      if (error.code == '22P02') return null;
+      //
+      // Checking .message, not just .code — .maybeSingle() doesn't always
+      // parse the error body the same way a normal query does; when it
+      // doesn't, .code ends up holding the HTTP status ('400') instead of
+      // the Postgres code, with the real error JSON dumped as a raw string
+      // into .message instead. Checking both covers either shape.
+      final isInvalidUuid =
+          error.code == '22P02' || error.message.contains('22P02');
+      if (isInvalidUuid) return null;
       rethrow;
     }
     if (row == null) return null;

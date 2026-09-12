@@ -1,7 +1,7 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
 
 /// `.category-tile` from the mockup. The visual tile can stay compact, but
 /// the tap target is padded out to the 48x48dp accessibility minimum
@@ -29,7 +29,7 @@ class CategoryTile extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(FmtRadius.tile),
+        borderRadius: BorderRadius.circular(ObsRadius.tile),
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
           child: Stack(
@@ -42,18 +42,18 @@ class CategoryTile extends StatelessWidget {
               Positioned.fill(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    vertical: FmtSpace.sm,
+                    vertical: ObsSpace.sm,
                     horizontal: 2,
                   ),
                   decoration: BoxDecoration(
                     color: selected
-                        ? FmtColors.brandTint
-                        : FmtColors.surface,
+                        ? ObsColors.brandTint
+                        : ObsColors.surface,
                     border: Border.all(
-                      color: selected ? FmtColors.brand : FmtColors.line,
+                      color: selected ? ObsColors.brand : ObsColors.line,
                       width: selected ? 1.6 : 1,
                     ),
-                    borderRadius: BorderRadius.circular(FmtRadius.tile),
+                    borderRadius: BorderRadius.circular(ObsRadius.tile),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -64,25 +64,25 @@ class CategoryTile extends StatelessWidget {
                         height: 34,
                         decoration: BoxDecoration(
                           color: selected
-                              ? FmtColors.brand
-                              : FmtColors.brandTint,
+                              ? ObsColors.brand
+                              : ObsColors.brandTint,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
                           icon,
                           size: 17,
-                          color: selected ? Colors.white : FmtColors.brandInk,
+                          color: selected ? Colors.white : ObsColors.brandInk,
                         ),
                       ),
-                      const SizedBox(height: FmtSpace.xs + 2),
+                      const SizedBox(height: ObsSpace.xs + 2),
                       Text(
                         label,
                         textAlign: TextAlign.center,
                         maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: FmtFontSize.xs,
+                        style: TextStyle(
+                          fontSize: ObsFontSize.xs,
                           fontWeight: FontWeight.w700,
-                          color: FmtColors.ink,
+                          color: ObsColors.ink,
                           height: 1.2,
                         ),
                       ),
@@ -97,8 +97,8 @@ class CategoryTile extends StatelessWidget {
                   child: Container(
                     width: 14,
                     height: 14,
-                    decoration: const BoxDecoration(
-                      color: FmtColors.red,
+                    decoration: BoxDecoration(
+                      color: ObsColors.red,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(

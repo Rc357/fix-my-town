@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/app/widgets/map_preview.dart';
-import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/map_preview.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/app/widgets/stepper_dots.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 
 class CaptureScreen extends ConsumerWidget {
   const CaptureScreen({super.key});
@@ -31,12 +31,12 @@ class CaptureScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Photo/video & location')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.lg),
+          padding: const EdgeInsets.all(ObsSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StepperDots(total: 3, currentIndex: 1),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -46,30 +46,30 @@ class CaptureScreen extends ConsumerWidget {
                         'PHOTOS OR VIDEO *REQUIRED',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: FmtSpace.sm),
+                      const SizedBox(height: ObsSpace.sm),
                       if (draft.hasVideo)
                         Container(
                           height: 160,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: FmtColors.surface,
-                            border: Border.all(color: FmtColors.brand),
-                            borderRadius: BorderRadius.circular(FmtRadius.card),
+                            color: ObsColors.surface,
+                            border: Border.all(color: ObsColors.brand),
+                            borderRadius: BorderRadius.circular(ObsRadius.card),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.videocam,
                                 size: 28,
-                                color: FmtColors.brand,
+                                color: ObsColors.brand,
                               ),
-                              const SizedBox(height: FmtSpace.xs),
+                              const SizedBox(height: ObsSpace.xs),
                               Text(
                                 'Video attached (${draft.videoDurationSeconds}s)',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: FmtFontSize.md,
+                                  fontSize: ObsFontSize.md,
                                 ),
                               ),
                             ],
@@ -82,7 +82,7 @@ class CaptureScreen extends ConsumerWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: draft.photoPaths.length + 1,
                             separatorBuilder: (context, index) =>
-                                const SizedBox(width: FmtSpace.sm),
+                                const SizedBox(width: ObsSpace.sm),
                             itemBuilder: (context, index) {
                               if (index == draft.photoPaths.length) {
                                 return _AddPhotoTile(
@@ -99,19 +99,19 @@ class CaptureScreen extends ConsumerWidget {
                         ),
                       if (!draft.hasVideo)
                         Padding(
-                          padding: const EdgeInsets.only(top: FmtSpace.xs),
+                          padding: const EdgeInsets.only(top: ObsSpace.xs),
                           child: Text(
                             draft.hasPhotos
                                 ? '${draft.photoPaths.length}/$maxPhotosPerReport photos added'
                                 : 'Tap to take a photo',
-                            style: const TextStyle(
-                              fontSize: FmtFontSize.sm,
-                              color: FmtColors.muted,
+                            style: TextStyle(
+                              fontSize: ObsFontSize.sm,
+                              color: ObsColors.muted,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                      const SizedBox(height: FmtSpace.sm),
+                      const SizedBox(height: ObsSpace.sm),
                       OutlineButton(
                         label: draft.isProcessingVideo
                             ? 'Preparing video…'
@@ -123,12 +123,12 @@ class CaptureScreen extends ConsumerWidget {
                             ? null
                             : controller.captureVideo,
                       ),
-                      const SizedBox(height: FmtSpace.xl),
+                      const SizedBox(height: ObsSpace.xl),
                       Text(
                         'LOCATION *REQUIRED',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: FmtSpace.sm),
+                      const SizedBox(height: ObsSpace.sm),
                       if (draft.hasLocation)
                         MapPreview(address: draft.formattedLocation)
                       else
@@ -136,7 +136,7 @@ class CaptureScreen extends ConsumerWidget {
                           height: 120,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            border: Border.all(color: FmtColors.line),
+                            border: Border.all(color: ObsColors.line),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: draft.isLocating
@@ -149,7 +149,7 @@ class CaptureScreen extends ConsumerWidget {
                         ),
                       if (draft.hasLocation)
                         Padding(
-                          padding: const EdgeInsets.only(top: FmtSpace.sm),
+                          padding: const EdgeInsets.only(top: ObsSpace.sm),
                           child: TextButton.icon(
                             onPressed: controller.captureLocation,
                             icon: const Icon(Icons.refresh, size: 16),
@@ -160,7 +160,7 @@ class CaptureScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               PrimaryButton(
                 label: 'Next',
                 onPressed: draft.hasMedia && draft.hasLocation
@@ -190,7 +190,7 @@ class _PhotoThumbnail extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(FmtRadius.card),
+            borderRadius: BorderRadius.circular(ObsRadius.card),
             child: Image.file(
               file,
               width: 96,
@@ -234,20 +234,20 @@ class _AddPhotoTile extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: enabled ? onTap : null,
-        borderRadius: BorderRadius.circular(FmtRadius.card),
+        borderRadius: BorderRadius.circular(ObsRadius.card),
         child: Container(
           width: 96,
           height: 96,
           decoration: BoxDecoration(
-            color: FmtColors.surface,
-            borderRadius: BorderRadius.circular(FmtRadius.card),
+            color: ObsColors.surface,
+            borderRadius: BorderRadius.circular(ObsRadius.card),
             border: Border.all(
-              color: enabled ? FmtColors.line : FmtColors.muted.withValues(alpha: 0.3),
+              color: enabled ? ObsColors.line : ObsColors.muted.withValues(alpha: 0.3),
             ),
           ),
           child: Icon(
             Icons.add_a_photo_outlined,
-            color: enabled ? FmtColors.muted : FmtColors.muted.withValues(alpha: 0.4),
+            color: enabled ? ObsColors.muted : ObsColors.muted.withValues(alpha: 0.4),
           ),
         ),
       ),

@@ -1,14 +1,14 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/app/widgets/stepper_dots.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/app/widgets/stepper_dots.dart';
+import 'package:obserba/features/incident_reporting/data/category_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/new_report_controller.dart';
 
 class ReviewScreen extends ConsumerStatefulWidget {
   const ReviewScreen({super.key});
@@ -55,12 +55,12 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       appBar: AppBar(title: const Text('Add details')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.lg),
+          padding: const EdgeInsets.all(ObsSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StepperDots(total: 3, currentIndex: 2),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -70,7 +70,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                         'DESCRIPTION (OPTIONAL)',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: FmtSpace.sm),
+                      const SizedBox(height: ObsSpace.sm),
                       TextField(
                         controller: _descriptionController,
                         maxLines: 4,
@@ -80,17 +80,17 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                               'Anything staff should know before they respond?',
                         ),
                       ),
-                      const SizedBox(height: FmtSpace.md),
+                      const SizedBox(height: ObsSpace.md),
                       Text(
                         'REVIEW',
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      const SizedBox(height: FmtSpace.sm),
+                      const SizedBox(height: ObsSpace.sm),
                       Container(
-                        padding: const EdgeInsets.all(FmtSpace.md),
+                        padding: const EdgeInsets.all(ObsSpace.md),
                         decoration: BoxDecoration(
-                          color: FmtColors.surface,
-                          border: Border.all(color: FmtColors.line),
+                          color: ObsColors.surface,
+                          border: Border.all(color: ObsColors.line),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: Row(
@@ -99,15 +99,15 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
-                                color: FmtColors.brandTint,
+                                color: ObsColors.brandTint,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
                                 category?.icon ?? Icons.help_outline,
-                                color: FmtColors.brandInk,
+                                color: ObsColors.brandInk,
                               ),
                             ),
-                            const SizedBox(width: FmtSpace.md),
+                            const SizedBox(width: ObsSpace.md),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,24 +116,24 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                                     category?.label ?? '',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w800,
-                                      fontSize: FmtFontSize.lg,
+                                      fontSize: ObsFontSize.lg,
                                     ),
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
                                     draft.formattedLocation,
-                                    style: const TextStyle(
-                                      fontSize: FmtFontSize.sm,
-                                      color: FmtColors.muted,
+                                    style: TextStyle(
+                                      fontSize: ObsFontSize.sm,
+                                      color: ObsColors.muted,
                                     ),
                                   ),
                                   Text(
                                     draft.hasVideo
                                         ? 'Video attached (${draft.videoDurationSeconds}s)'
                                         : '${draft.photoPaths.length} photo${draft.photoPaths.length == 1 ? '' : 's'} attached',
-                                    style: const TextStyle(
-                                      fontSize: FmtFontSize.sm,
-                                      color: FmtColors.muted,
+                                    style: TextStyle(
+                                      fontSize: ObsFontSize.sm,
+                                      color: ObsColors.muted,
                                     ),
                                   ),
                                 ],
@@ -146,7 +146,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               PrimaryButton(
                 label: 'Submit report',
                 loading: draft.isSubmitting,

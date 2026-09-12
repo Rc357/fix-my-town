@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
 
 /// FR-1.2/FR-20.2 — either one or more [photoPaths], or a single [videoPath],
 /// never both, never neither; NewReportController is what actually enforces

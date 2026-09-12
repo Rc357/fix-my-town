@@ -1,11 +1,11 @@
-import 'package:fixmytown_citizen/app/config/app_config.dart';
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/in_memory_report_repository.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/supabase_report_repository.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/config/app_config.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
+import 'package:obserba/features/incident_reporting/data/in_memory_report_repository.dart';
+import 'package:obserba/features/incident_reporting/data/supabase_report_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/domain/report_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Same fallback pattern as authRepositoryProvider: real Supabase once

@@ -1,15 +1,15 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
-import 'package:fixmytown_citizen/app/widgets/support_button.dart';
-import 'package:fixmytown_citizen/app/widgets/verified_badge.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_media_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/status_chip.dart';
+import 'package:obserba/app/widgets/support_button.dart';
+import 'package:obserba/app/widgets/verified_badge.dart';
+import 'package:obserba/features/incident_reporting/data/category_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
+import 'package:obserba/features/incident_reporting/presentation/widgets/report_media_carousel.dart';
 
 /// FR-20.1 — a scrollable-feed "post," Facebook-post-style: a header row
 /// (round icon "avatar", category name, timestamp, status), full-bleed
@@ -39,12 +39,12 @@ class ReportFeedPost extends ConsumerWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: FmtColors.surface,
-        border: Border.all(color: FmtColors.line),
-        borderRadius: BorderRadius.circular(FmtRadius.card),
+        color: ObsColors.surface,
+        border: Border.all(color: ObsColors.line),
+        borderRadius: BorderRadius.circular(ObsRadius.card),
       ),
       child: Material(
-        color: FmtColors.surface,
+        color: ObsColors.surface,
         child: InkWell(
           onTap: onTap,
           child: Column(
@@ -52,10 +52,10 @@ class ReportFeedPost extends ConsumerWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  FmtSpace.md,
-                  FmtSpace.md,
-                  FmtSpace.md,
-                  FmtSpace.sm,
+                  ObsSpace.md,
+                  ObsSpace.md,
+                  ObsSpace.md,
+                  ObsSpace.sm,
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class ReportFeedPost extends ConsumerWidget {
                       ),
                       child: Icon(category.icon, color: chipFg, size: 20),
                     ),
-                    const SizedBox(width: FmtSpace.sm),
+                    const SizedBox(width: ObsSpace.sm),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,16 +86,16 @@ class ReportFeedPost extends ConsumerWidget {
                                 ),
                               ),
                               if (report.isVerified) ...[
-                                const SizedBox(width: FmtSpace.xs),
+                                const SizedBox(width: ObsSpace.xs),
                                 const VerifiedBadge(),
                               ],
                             ],
                           ),
                           Text(
                             _relativeTime(report.createdAt),
-                            style: const TextStyle(
-                              fontSize: FmtFontSize.sm,
-                              color: FmtColors.muted,
+                            style: TextStyle(
+                              fontSize: ObsFontSize.sm,
+                              color: ObsColors.muted,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -112,31 +112,31 @@ class ReportFeedPost extends ConsumerWidget {
               if (report.description.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    FmtSpace.md,
+                    ObsSpace.md,
                     0,
-                    FmtSpace.md,
-                    FmtSpace.sm,
+                    ObsSpace.md,
+                    ObsSpace.sm,
                   ),
                   child: Text(
                     report.description,
-                    style: const TextStyle(
-                      fontSize: FmtFontSize.xl,
-                      color: FmtColors.ink,
+                    style: TextStyle(
+                      fontSize: ObsFontSize.xl,
+                      color: ObsColors.ink,
                     ),
                   ),
                 ),
               if (report.media.hasPhotos || report.media.hasVideo)
                 ReportMediaCarousel(media: report.media),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: FmtSpace.md),
-                child: Divider(height: FmtSpace.md),
+                padding: EdgeInsets.symmetric(horizontal: ObsSpace.md),
+                child: Divider(height: ObsSpace.md),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  FmtSpace.sm,
+                  ObsSpace.sm,
                   0,
-                  FmtSpace.sm,
-                  FmtSpace.xs,
+                  ObsSpace.sm,
+                  ObsSpace.xs,
                 ),
                 child: Row(
                   children: [
@@ -153,7 +153,7 @@ class ReportFeedPost extends ConsumerWidget {
                         child: TextButton.icon(
                           onPressed: onTap,
                           style: TextButton.styleFrom(
-                            foregroundColor: FmtColors.muted,
+                            foregroundColor: ObsColors.muted,
                             padding: EdgeInsets.zero,
                           ),
                           icon: const Icon(

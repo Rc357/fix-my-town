@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/domain/report_repository.dart';
 
 /// A backend-free adapter — same pattern as InMemoryAuthRepository. Replace
 /// with an adapter over docs/08-api-specification.md's /reports endpoints
@@ -14,8 +14,7 @@ import 'package:fixmytown_citizen/features/incident_reporting/domain/report_repo
 /// keeps this feature's data layer decoupled from auth's, per the "explicit
 /// contract or provider" cross-feature rule (see README's Feature rules).
 class InMemoryReportRepository implements ReportRepository {
-  InMemoryReportRepository({required String? Function() currentUserId})
-    : _currentUserId = currentUserId {
+  InMemoryReportRepository({required this._currentUserId}) {
     _reports.addAll(_seed());
     _mineIds.addAll(_reports.map((r) => r.id));
   }
@@ -164,7 +163,7 @@ class InMemoryReportRepository implements ReportRepository {
       6,
       (_) => chars[_random.nextInt(chars.length)],
     ).join();
-    return 'FMT-$code';
+    return 'OBS-$code';
   }
 
   void dispose() => _controller.close();
@@ -172,7 +171,7 @@ class InMemoryReportRepository implements ReportRepository {
   List<Report> _seed() => [
     Report(
       id: 'seed-1',
-      trackingId: 'FMT-8F21QZ',
+      trackingId: 'OBS-8F21QZ',
       categoryId: 'street_light',
       description:
           'Streetlight has been out for a week near the covered court.',
@@ -187,7 +186,7 @@ class InMemoryReportRepository implements ReportRepository {
     ),
     Report(
       id: 'seed-2',
-      trackingId: 'FMT-2WK9F3',
+      trackingId: 'OBS-2WK9F3',
       categoryId: 'flooding',
       description:
           "Knee-deep floodwater blocking the street since this morning's rain.",
@@ -200,7 +199,7 @@ class InMemoryReportRepository implements ReportRepository {
     ),
     Report(
       id: 'seed-3',
-      trackingId: 'FMT-5T88LX',
+      trackingId: 'OBS-5T88LX',
       categoryId: 'garbage',
       description: 'Uncollected garbage piling up near the market entrance.',
       latitude: 14.6280,

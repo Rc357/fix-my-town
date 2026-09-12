@@ -1,4 +1,4 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment.dart';
+import 'package:obserba/features/incident_reporting/domain/comment.dart';
 
 /// FR-18. Separate from ReportRepository — comments are a genuinely
 /// independent resource (their own list, their own pagination-shaped access

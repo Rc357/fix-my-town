@@ -1,4 +1,4 @@
-import 'package:fixmytown_citizen/features/notifications/domain/app_notification.dart';
+import 'package:obserba/features/notifications/domain/app_notification.dart';
 
 /// Vendor-independent contract — same pattern as ReportRepository/
 /// CommentRepository.

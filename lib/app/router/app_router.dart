@@ -1,21 +1,21 @@
-import 'package:fixmytown_citizen/app/router/router_refresh_notifier.dart';
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/choose_username_screen.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/login_screen.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/profile_screen.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/signup_screen.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/welcome_screen.dart';
-import 'package:fixmytown_citizen/features/home/presentation/home_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/my_reports_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/capture_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/category_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/review_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/new_report/submitted_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/report_detail_screen.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/track_by_id_screen.dart';
-import 'package:fixmytown_citizen/features/notifications/presentation/notifications_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/router/router_refresh_notifier.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
+import 'package:obserba/features/auth/presentation/choose_username_screen.dart';
+import 'package:obserba/features/auth/presentation/login_screen.dart';
+import 'package:obserba/features/auth/presentation/profile_screen.dart';
+import 'package:obserba/features/auth/presentation/signup_screen.dart';
+import 'package:obserba/features/auth/presentation/welcome_screen.dart';
+import 'package:obserba/features/home/presentation/home_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/my_reports_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/capture_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/category_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/review_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/new_report/submitted_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/report_detail_screen.dart';
+import 'package:obserba/features/incident_reporting/presentation/track_by_id_screen.dart';
+import 'package:obserba/features/notifications/presentation/notifications_screen.dart';
 
 abstract final class AppRoutes {
   static const welcome = '/welcome';

@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/auth/domain/barangay.dart';
-import 'package:fixmytown_citizen/features/auth/domain/barangay_repository.dart';
+import 'package:obserba/features/auth/domain/barangay.dart';
+import 'package:obserba/features/auth/domain/barangay_repository.dart';
 
 /// Demo data for when there's no Supabase backend configured — same role as
 /// InMemoryCategoryRepository.

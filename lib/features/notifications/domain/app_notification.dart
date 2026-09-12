@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
 
 /// The in-app notification list's item — distinct from FCM push
 /// (PushNotificationService), which is an ephemeral OS-tray alert. This is

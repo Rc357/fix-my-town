@@ -1,7 +1,7 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/app_notification.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/notification_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/notifications/domain/app_notification.dart';
+import 'package:obserba/features/notifications/domain/notification_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Backed by the `notification` table (.test_folder/supabase-setup-guide.md

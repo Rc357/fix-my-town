@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/comment.dart';
+import 'package:obserba/features/incident_reporting/domain/comment_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Backed by report_comment/comment_flag (.test_folder/supabase-setup-guide.md).

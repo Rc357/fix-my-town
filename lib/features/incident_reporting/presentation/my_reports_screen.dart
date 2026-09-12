@@ -1,11 +1,11 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/widgets/app_bottom_nav.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/widgets/app_bottom_nav.dart';
+import 'package:obserba/features/incident_reporting/data/report_providers.dart';
+import 'package:obserba/features/incident_reporting/presentation/widgets/report_list_tile.dart';
 
 class MyReportsScreen extends ConsumerWidget {
   const MyReportsScreen({super.key});
@@ -23,21 +23,21 @@ class MyReportsScreen extends ConsumerWidget {
               Center(child: Text('Something went wrong: $error')),
           data: (reports) {
             if (reports.isEmpty) {
-              return const Center(
+              return Center(
                 child: Padding(
-                  padding: EdgeInsets.all(FmtSpace.xl),
+                  padding: const EdgeInsets.all(ObsSpace.xl),
                   child: Text(
                     "You haven't reported anything yet.",
-                    style: TextStyle(color: FmtColors.muted),
+                    style: TextStyle(color: ObsColors.muted),
                   ),
                 ),
               );
             }
             return ListView.separated(
-              padding: const EdgeInsets.all(FmtSpace.lg),
+              padding: const EdgeInsets.all(ObsSpace.lg),
               itemCount: reports.length,
               separatorBuilder: (context, index) =>
-                  const SizedBox(height: FmtSpace.sm),
+                  const SizedBox(height: ObsSpace.sm),
               itemBuilder: (context, index) {
                 final report = reports[index];
                 return ReportListTile(

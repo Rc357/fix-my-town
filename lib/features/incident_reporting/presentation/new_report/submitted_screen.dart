@@ -1,10 +1,10 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/app/widgets/workflow_timeline.dart';
 
 class SubmittedScreen extends StatelessWidget {
   const SubmittedScreen({required this.trackingId, super.key});
@@ -16,39 +16,39 @@ class SubmittedScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.xl),
+          padding: const EdgeInsets.all(ObsSpace.xl),
           child: Column(
             children: [
               const Spacer(),
               Container(
                 width: 72,
                 height: 72,
-                decoration: const BoxDecoration(
-                  color: FmtColors.greenTint,
+                decoration: BoxDecoration(
+                  color: ObsColors.greenTint,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check_rounded,
-                  color: FmtColors.green,
+                  color: ObsColors.green,
                   size: 36,
                 ),
               ),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               const Text(
                 'Report submitted',
                 style: TextStyle(
-                  fontSize: FmtFontSize.xxl,
+                  fontSize: ObsFontSize.xxl,
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              const SizedBox(height: FmtSpace.sm),
+              const SizedBox(height: ObsSpace.sm),
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: FmtSpace.md,
+                  horizontal: ObsSpace.md,
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: FmtColors.brandTint,
+                  color: ObsColors.brandTint,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -56,12 +56,12 @@ class SubmittedScreen extends StatelessWidget {
                   style: TextStyle(
                     fontFeatures: const [FontFeature.tabularFigures()],
                     fontWeight: FontWeight.w700,
-                    color: FmtColors.brandInk,
+                    color: ObsColors.brandInk,
                     letterSpacing: 0.5,
                   ),
                 ),
               ),
-              const SizedBox(height: FmtSpace.xl),
+              const SizedBox(height: ObsSpace.xl),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -69,7 +69,7 @@ class SubmittedScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
-              const SizedBox(height: FmtSpace.sm),
+              const SizedBox(height: ObsSpace.sm),
               WorkflowTimeline(
                 steps: const [
                   TimelineStepData(
@@ -92,7 +92,7 @@ class SubmittedScreen extends StatelessWidget {
                 label: 'Track this report',
                 onPressed: () => context.go('/reports/$trackingId'),
               ),
-              const SizedBox(height: FmtSpace.sm),
+              const SizedBox(height: ObsSpace.sm),
               OutlineButton(
                 label: 'Report another issue',
                 onPressed: () => context.go('/reports/new/category'),

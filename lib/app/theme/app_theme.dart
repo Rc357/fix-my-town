@@ -1,107 +1,107 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
 
-/// A single, committed theme — not a light/dark pair. See
-/// docs-mobile/04-design-system.md "One committed theme, not light/dark":
-/// for a civic app used briefly and functionally, one consistent,
-/// high-contrast presentation beats accommodating system dark mode.
+/// Light and dark, via ObsColors' brightness-aware getters — see that
+/// file's doc comment. `theme` is a `static get`, not `static final`: a
+/// `final` would memoize this ThemeData on first access and never rebuild
+/// it for a later brightness change, same reasoning as ObsText. Nothing
+/// below can be `const` for the same reason ObsColors' fields aren't —
+/// they're no longer compile-time constants.
 abstract final class AppTheme {
-  static final theme = ThemeData(
+  static ThemeData get theme => ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: FmtColors.surface,
+    brightness: ObsColors.brightness,
+    scaffoldBackgroundColor: ObsColors.surface,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: FmtColors.brand,
-      brightness: Brightness.light,
-      primary: FmtColors.brand,
+      seedColor: ObsColors.brand,
+      brightness: ObsColors.brightness,
+      primary: ObsColors.brand,
       onPrimary: Colors.white,
-      surface: FmtColors.surface,
-      onSurface: FmtColors.ink,
-      error: FmtColors.red,
+      surface: ObsColors.surface,
+      onSurface: ObsColors.ink,
+      error: ObsColors.red,
     ),
     // Inter via GoogleFonts.interTextTheme wraps our custom TextTheme so
     // the ambient DefaultTextStyle (what scattered inline
-    // `TextStyle(fontSize: FmtFontSize.xxx)` literals across the app merge
-    // onto) also falls back to Inter, not just the named FmtText roles.
+    // `TextStyle(fontSize: ObsFontSize.xxx)` literals across the app merge
+    // onto) also falls back to Inter, not just the named ObsText roles.
     textTheme: GoogleFonts.interTextTheme(
       TextTheme(
-        headlineMedium: FmtText.display,
-        titleMedium: FmtText.title,
-        bodyMedium: FmtText.body,
-        labelLarge: FmtText.label,
-        bodySmall: FmtText.caption,
+        headlineMedium: ObsText.display,
+        titleMedium: ObsText.title,
+        bodyMedium: ObsText.body,
+        labelLarge: ObsText.label,
+        bodySmall: ObsText.caption,
       ),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: FmtColors.surface,
-      foregroundColor: FmtColors.ink,
+      backgroundColor: ObsColors.surface,
+      foregroundColor: ObsColors.ink,
       elevation: 0,
       centerTitle: false,
-      titleTextStyle: FmtText.title,
+      titleTextStyle: ObsText.title,
     ),
     cardTheme: CardThemeData(
-      color: FmtColors.surface,
+      color: ObsColors.surface,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(FmtRadius.card),
-        side: const BorderSide(color: FmtColors.line),
+        borderRadius: BorderRadius.circular(ObsRadius.card),
+        side: BorderSide(color: ObsColors.line),
       ),
       margin: EdgeInsets.zero,
     ),
-    dividerTheme: const DividerThemeData(
-      color: FmtColors.line,
-      thickness: 1,
-    ),
+    dividerTheme: DividerThemeData(color: ObsColors.line, thickness: 1),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: FmtColors.surface,
-      labelStyle: const TextStyle(color: FmtColors.muted),
-      floatingLabelStyle: const TextStyle(color: FmtColors.brand),
+      fillColor: ObsColors.surface,
+      labelStyle: TextStyle(color: ObsColors.muted),
+      floatingLabelStyle: TextStyle(color: ObsColors.brand),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(FmtRadius.input),
-        borderSide: const BorderSide(color: FmtColors.line),
+        borderRadius: BorderRadius.circular(ObsRadius.input),
+        borderSide: BorderSide(color: ObsColors.line),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(FmtRadius.input),
-        borderSide: const BorderSide(color: FmtColors.line),
+        borderRadius: BorderRadius.circular(ObsRadius.input),
+        borderSide: BorderSide(color: ObsColors.line),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(FmtRadius.input),
-        borderSide: const BorderSide(color: FmtColors.brand, width: 2),
+        borderRadius: BorderRadius.circular(ObsRadius.input),
+        borderSide: BorderSide(color: ObsColors.brand, width: 2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(FmtRadius.input),
-        borderSide: const BorderSide(color: FmtColors.red),
+        borderRadius: BorderRadius.circular(ObsRadius.input),
+        borderSide: BorderSide(color: ObsColors.red),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: FmtColors.brand,
+        backgroundColor: ObsColors.brand,
         foregroundColor: Colors.white,
-        disabledBackgroundColor: FmtColors.muted.withValues(alpha: 0.2),
-        disabledForegroundColor: FmtColors.muted,
+        disabledBackgroundColor: ObsColors.muted.withValues(alpha: 0.2),
+        disabledForegroundColor: ObsColors.muted,
         minimumSize: const Size.fromHeight(50),
         // Pill/stadium shape — matches bluehive-project's RoundedCornerButton.
         shape: const StadiumBorder(),
-        textStyle: GoogleFonts.inter(fontSize: FmtFontSize.xl, fontWeight: FontWeight.w700),
+        textStyle: GoogleFonts.inter(fontSize: ObsFontSize.xl, fontWeight: FontWeight.w700),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: FmtColors.brandInk,
+        foregroundColor: ObsColors.brandInk,
         minimumSize: const Size.fromHeight(50),
-        side: const BorderSide(color: FmtColors.brand, width: 1.4),
+        side: BorderSide(color: ObsColors.brand, width: 1.4),
         shape: const StadiumBorder(),
-        textStyle: GoogleFonts.inter(fontSize: FmtFontSize.xl, fontWeight: FontWeight.w700),
+        textStyle: GoogleFonts.inter(fontSize: ObsFontSize.xl, fontWeight: FontWeight.w700),
       ),
     ),
-    iconTheme: const IconThemeData(color: FmtColors.ink),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: FmtColors.surface,
-      selectedItemColor: FmtColors.brand,
-      unselectedItemColor: FmtColors.muted,
+    iconTheme: IconThemeData(color: ObsColors.ink),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: ObsColors.surface,
+      selectedItemColor: ObsColors.brand,
+      unselectedItemColor: ObsColors.muted,
       type: BottomNavigationBarType.fixed,
     ),
   );

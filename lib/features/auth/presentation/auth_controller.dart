@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
 
 class AuthController extends AsyncNotifier<void> {
   @override

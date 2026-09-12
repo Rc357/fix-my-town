@@ -1,7 +1,7 @@
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
 
 /// Guest-only path — a Guest has no account to list history against
 /// (FR-1.1), only the tracking ID(s) issued at submission. See
@@ -35,21 +35,21 @@ class _TrackByIdScreenState extends State<TrackByIdScreen> {
       appBar: AppBar(title: const Text('Track a report')),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.lg),
+          padding: const EdgeInsets.all(ObsSpace.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
                 'Enter the tracking ID you received when you submitted your report.',
               ),
-              const SizedBox(height: FmtSpace.md),
+              const SizedBox(height: ObsSpace.md),
               TextField(
                 controller: _controller,
                 textCapitalization: TextCapitalization.characters,
                 decoration: const InputDecoration(hintText: 'e.g. ANG-2WK9F3'),
                 onSubmitted: (_) => _track(),
               ),
-              const SizedBox(height: FmtSpace.lg),
+              const SizedBox(height: ObsSpace.lg),
               PrimaryButton(label: 'Track', onPressed: _track),
             ],
           ),

@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/features/auth/presentation/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/features/auth/presentation/auth_controller.dart';
 
 /// FR-16.3 — the mandatory post-OAuth gate. Reached only when the signed-in
 /// user's `username` is null (Google/Facebook first-time sign-in); the
@@ -55,26 +55,26 @@ class _ChooseUsernameScreenState extends ConsumerState<ChooseUsernameScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(FmtSpace.xl),
+          padding: const EdgeInsets.all(ObsSpace.xl),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: FmtSpace.xxl),
+                const SizedBox(height: ObsSpace.xxl),
                 Text(
                   'Choose a username',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: FmtSpace.sm),
-                const Text(
+                const SizedBox(height: ObsSpace.sm),
+                Text(
                   'This is what other citizens see — we\'ve suggested one '
                   'below so you can stay anonymous, or pick your own. Your '
                   'real name is never shown unless you turn that on later, '
                   'in your profile.',
-                  style: TextStyle(color: FmtColors.muted),
+                  style: TextStyle(color: ObsColors.muted),
                 ),
-                const SizedBox(height: FmtSpace.xl),
+                const SizedBox(height: ObsSpace.xl),
                 TextFormField(
                   controller: _controller,
                   autofocus: true,
@@ -82,7 +82,7 @@ class _ChooseUsernameScreenState extends ConsumerState<ChooseUsernameScreen> {
                   validator: (value) =>
                       (value?.trim().isNotEmpty ?? false) ? null : 'Choose a username.',
                 ),
-                const SizedBox(height: FmtSpace.lg),
+                const SizedBox(height: ObsSpace.lg),
                 PrimaryButton(
                   label: 'Continue',
                   loading: authAction.isLoading,

@@ -1,10 +1,10 @@
-import 'package:fixmytown_citizen/app/widgets/report_card.dart';
-import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/widgets/report_card.dart';
+import 'package:obserba/app/widgets/status_chip.dart';
+import 'package:obserba/features/incident_reporting/data/category_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
 
 /// Maps a Report onto ReportCard consistently everywhere a report appears
 /// in a list (Home feed, My Reports) — one place that decides "status color

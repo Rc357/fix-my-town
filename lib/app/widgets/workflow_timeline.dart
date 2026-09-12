@@ -1,6 +1,6 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
 
 enum TimelineStepState { done, current, pending }
 
@@ -46,16 +46,16 @@ class _TimelineRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dotColor = switch (step.state) {
-      TimelineStepState.done => FmtColors.green,
-      TimelineStepState.current => FmtColors.amber,
-      TimelineStepState.pending => FmtColors.line,
+      TimelineStepState.done => ObsColors.green,
+      TimelineStepState.current => ObsColors.amber,
+      TimelineStepState.pending => ObsColors.line,
     };
     final lineColor = step.state == TimelineStepState.done
-        ? FmtColors.green
-        : FmtColors.line;
+        ? ObsColors.green
+        : ObsColors.line;
     final titleColor = step.state == TimelineStepState.pending
-        ? FmtColors.muted
-        : FmtColors.ink;
+        ? ObsColors.muted
+        : ObsColors.ink;
 
     return IntrinsicHeight(
       child: Row(
@@ -73,7 +73,7 @@ class _TimelineRow extends StatelessWidget {
                   boxShadow: step.state == TimelineStepState.current
                       ? [
                           BoxShadow(
-                            color: FmtColors.amberTint,
+                            color: ObsColors.amberTint,
                             blurRadius: 0,
                             spreadRadius: 3,
                           ),
@@ -95,7 +95,7 @@ class _TimelineRow extends StatelessWidget {
                   Text(
                     step.title,
                     style: TextStyle(
-                      fontSize: FmtFontSize.lg,
+                      fontSize: ObsFontSize.lg,
                       fontWeight: FontWeight.w800,
                       color: titleColor,
                     ),
@@ -105,9 +105,9 @@ class _TimelineRow extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 1),
                       child: Text(
                         step.subtitle!,
-                        style: const TextStyle(
-                          fontSize: FmtFontSize.sm,
-                          color: FmtColors.muted,
+                        style: TextStyle(
+                          fontSize: ObsFontSize.sm,
+                          color: ObsColors.muted,
                         ),
                       ),
                     ),

@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>fixmytown_citizen</string>
+	<string>obserba</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -25,11 +25,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>NSCameraUsageDescription</key>
-	<string>FixMyTown needs your camera to take a photo of the issue you're reporting.</string>
+	<string>Obserba needs your camera to take a photo of the issue you're reporting.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>FixMyTown uses your location to pin the report to the right spot and route it to the correct barangay.</string>
+	<string>Obserba uses your location to pin the report to the right spot and route it to the correct barangay.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>FixMyTown needs your microphone to record audio with the video of the issue you're reporting.</string>
+	<string>Obserba needs your microphone to record audio with the video of the issue you're reporting.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -42,10 +42,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>io.fixmytown.citizen.oauth</string>
+			<string>io.obserba.oauth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>io.fixmytown.citizen</string>
+				<string>io.obserba</string>
 			</array>
 		</dict>
 	</array>

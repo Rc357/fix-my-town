@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/app_notification.dart';
-import 'package:fixmytown_citizen/features/notifications/domain/notification_repository.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/notifications/domain/app_notification.dart';
+import 'package:obserba/features/notifications/domain/notification_repository.dart';
 
 /// Demo data for when there's no Supabase backend configured — same role as
 /// InMemoryReportRepository. Matches that repository's seed-1/seed-2/seed-3

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fixmytown.citizen"
+    namespace = "com.obserba"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.fixmytown.citizen"
+        applicationId = "com.obserba"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -38,17 +38,17 @@ android {
             dimension = "environment"
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            resValue("string", "app_name", "DEV FMT")
+            resValue("string", "app_name", "DEV Obserba")
         }
         create("staging") {
             dimension = "environment"
             applicationIdSuffix = ".stg"
             versionNameSuffix = "-stg"
-            resValue("string", "app_name", "STG FMT")
+            resValue("string", "app_name", "STG Obserba")
         }
         create("production") {
             dimension = "environment"
-            resValue("string", "app_name", "FMT")
+            resValue("string", "app_name", "Obserba")
         }
     }
 

@@ -1,20 +1,20 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/fmt_button.dart';
-import 'package:fixmytown_citizen/app/widgets/verified_badge.dart';
-import 'package:fixmytown_citizen/app/widgets/workflow_timeline.dart';
-import 'package:fixmytown_citizen/features/auth/data/auth_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/category_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/comment_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/data/report_providers.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/comment.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_category.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/domain/report_reaction.dart';
-import 'package:fixmytown_citizen/features/incident_reporting/presentation/widgets/report_media_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/obs_button.dart';
+import 'package:obserba/app/widgets/verified_badge.dart';
+import 'package:obserba/app/widgets/workflow_timeline.dart';
+import 'package:obserba/features/auth/data/auth_providers.dart';
+import 'package:obserba/features/incident_reporting/data/category_providers.dart';
+import 'package:obserba/features/incident_reporting/data/comment_providers.dart';
+import 'package:obserba/features/incident_reporting/data/report_providers.dart';
+import 'package:obserba/features/incident_reporting/domain/comment.dart';
+import 'package:obserba/features/incident_reporting/domain/report.dart';
+import 'package:obserba/features/incident_reporting/domain/report_category.dart';
+import 'package:obserba/features/incident_reporting/domain/report_reaction.dart';
+import 'package:obserba/features/incident_reporting/presentation/widgets/report_media_carousel.dart';
 
 class ReportDetailScreen extends ConsumerWidget {
   const ReportDetailScreen({required this.idOrTrackingId, super.key});
@@ -35,13 +35,13 @@ class ReportDetailScreen extends ConsumerWidget {
           data: (report) {
             if (report == null) {
               return Padding(
-                padding: const EdgeInsets.all(FmtSpace.xl),
+                padding: const EdgeInsets.all(ObsSpace.xl),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.search_off, size: 48, color: FmtColors.muted),
-                    SizedBox(height: FmtSpace.md),
-                    Text(
+                  children: [
+                    Icon(Icons.search_off, size: 48, color: ObsColors.muted),
+                    const SizedBox(height: ObsSpace.md),
+                    const Text(
                       "We couldn't find a report with that tracking ID.",
                       textAlign: TextAlign.center,
                     ),
@@ -70,7 +70,7 @@ class _ReportDetailBody extends ConsumerWidget {
         unknownCategory(report.categoryId);
 
     return Padding(
-      padding: const EdgeInsets.all(FmtSpace.lg),
+      padding: const EdgeInsets.all(ObsSpace.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -80,12 +80,12 @@ class _ReportDetailBody extends ConsumerWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: FmtColors.brandTint,
+                  color: ObsColors.brandTint,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(category.icon, color: FmtColors.brandInk),
+                child: Icon(category.icon, color: ObsColors.brandInk),
               ),
-              const SizedBox(width: FmtSpace.md),
+              const SizedBox(width: ObsSpace.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,22 +97,22 @@ class _ReportDetailBody extends ConsumerWidget {
                             category.label,
                             style: const TextStyle(
                               fontWeight: FontWeight.w800,
-                              fontSize: FmtFontSize.xxl,
+                              fontSize: ObsFontSize.xxl,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         if (report.isVerified) ...[
-                          const SizedBox(width: FmtSpace.xs),
+                          const SizedBox(width: ObsSpace.xs),
                           const VerifiedBadge(),
                         ],
                       ],
                     ),
                     Text(
                       report.trackingId,
-                      style: const TextStyle(
-                        fontSize: FmtFontSize.sm,
-                        color: FmtColors.muted,
+                      style: TextStyle(
+                        fontSize: ObsFontSize.sm,
+                        color: ObsColors.muted,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -121,7 +121,7 @@ class _ReportDetailBody extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: FmtSpace.lg),
+          const SizedBox(height: ObsSpace.lg),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -129,10 +129,10 @@ class _ReportDetailBody extends ConsumerWidget {
                 children: [
                   if (report.media.hasPhotos || report.media.hasVideo) ...[
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(FmtRadius.card),
+                      borderRadius: BorderRadius.circular(ObsRadius.card),
                       child: ReportMediaCarousel(media: report.media, height: 260),
                     ),
-                    const SizedBox(height: FmtSpace.lg),
+                    const SizedBox(height: ObsSpace.lg),
                   ],
                   WorkflowTimeline(steps: buildReportTimeline(report.status)),
                   if (report.description.isNotEmpty) ...[
@@ -140,34 +140,34 @@ class _ReportDetailBody extends ConsumerWidget {
                       'CITIZEN NOTE',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    const SizedBox(height: FmtSpace.xs),
+                    const SizedBox(height: ObsSpace.xs),
                     Text(
                       report.description,
-                      style: const TextStyle(
-                        fontSize: FmtFontSize.xl,
-                        color: FmtColors.ink,
+                      style: TextStyle(
+                        fontSize: ObsFontSize.xl,
+                        color: ObsColors.ink,
                       ),
                     ),
-                    const SizedBox(height: FmtSpace.lg),
+                    const SizedBox(height: ObsSpace.lg),
                   ],
                   Text(
                     'LOCATION',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
-                  const SizedBox(height: FmtSpace.xs),
-                  Text(report.address, style: const TextStyle(fontSize: FmtFontSize.lg)),
-                  const SizedBox(height: FmtSpace.lg),
+                  const SizedBox(height: ObsSpace.xs),
+                  Text(report.address, style: const TextStyle(fontSize: ObsFontSize.lg)),
+                  const SizedBox(height: ObsSpace.lg),
                   _ReactionsRow(report: report),
-                  const SizedBox(height: FmtSpace.lg),
+                  const SizedBox(height: ObsSpace.lg),
                   const Divider(),
-                  const SizedBox(height: FmtSpace.sm),
+                  const SizedBox(height: ObsSpace.sm),
                   _CommentsSection(reportId: report.id),
                 ],
               ),
             ),
           ),
           if (report.status.needsCitizenConfirmation) ...[
-            const SizedBox(height: FmtSpace.md),
+            const SizedBox(height: ObsSpace.md),
             Row(
               children: [
                 Expanded(
@@ -177,7 +177,7 @@ class _ReportDetailBody extends ConsumerWidget {
                         ref.read(reportRepositoryProvider).dispute(report.id),
                   ),
                 ),
-                const SizedBox(width: FmtSpace.sm),
+                const SizedBox(width: ObsSpace.sm),
                 Expanded(
                   child: PrimaryButton(
                     label: 'Confirm resolved',
@@ -235,7 +235,7 @@ class _ReactionsRow extends ConsumerWidget {
             onPressed: isSignedIn ? () => react(ReactionKind.support) : null,
           ),
         ),
-        const SizedBox(width: FmtSpace.sm),
+        const SizedBox(width: ObsSpace.sm),
         Expanded(
           child: _ReactionButton(
             icon: Icons.flag_outlined,
@@ -296,12 +296,12 @@ class _ReactionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = active ? FmtColors.brand : FmtColors.muted;
+    final color = active ? ObsColors.brand : ObsColors.muted;
     return OutlinedButton.icon(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         foregroundColor: color,
-        side: BorderSide(color: active ? FmtColors.brand : FmtColors.line),
+        side: BorderSide(color: active ? ObsColors.brand : ObsColors.line),
       ),
       icon: Icon(icon, size: 16, color: color),
       label: Text(count > 0 ? '$label ($count)' : label),
@@ -325,16 +325,16 @@ class _CommentsSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('COMMENTS', style: Theme.of(context).textTheme.labelLarge),
-        const SizedBox(height: FmtSpace.sm),
+        const SizedBox(height: ObsSpace.sm),
         commentsAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stackTrace) => Text('Couldn\'t load comments: $error'),
           data: (comments) => comments.isEmpty
-              ? const Padding(
-                  padding: EdgeInsets.symmetric(vertical: FmtSpace.sm),
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: ObsSpace.sm),
                   child: Text(
                     'No comments yet.',
-                    style: TextStyle(color: FmtColors.muted),
+                    style: TextStyle(color: ObsColors.muted),
                   ),
                 )
               : Column(
@@ -344,13 +344,13 @@ class _CommentsSection extends ConsumerWidget {
                   ],
                 ),
         ),
-        const SizedBox(height: FmtSpace.sm),
+        const SizedBox(height: ObsSpace.sm),
         if (user?.username != null)
           _CommentComposer(reportId: reportId)
         else
-          const Text(
+          Text(
             'Sign in with a username to comment.',
-            style: TextStyle(color: FmtColors.muted, fontSize: FmtFontSize.md),
+            style: TextStyle(color: ObsColors.muted, fontSize: ObsFontSize.md),
           ),
       ],
     );
@@ -365,7 +365,7 @@ class _CommentTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: FmtSpace.xs),
+      padding: const EdgeInsets.symmetric(vertical: ObsSpace.xs),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -377,15 +377,15 @@ class _CommentTile extends ConsumerWidget {
                   comment.authorUsername,
                   style: const TextStyle(
                     fontWeight: FontWeight.w800,
-                    fontSize: FmtFontSize.md,
+                    fontSize: ObsFontSize.md,
                   ),
                 ),
-                Text(comment.body, style: const TextStyle(fontSize: FmtFontSize.lg)),
+                Text(comment.body, style: const TextStyle(fontSize: ObsFontSize.lg)),
               ],
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.flag_outlined, size: 16, color: FmtColors.muted),
+            icon: Icon(Icons.flag_outlined, size: 16, color: ObsColors.muted),
             tooltip: 'Report this comment',
             onPressed: () => _promptFlagReason(context, ref, comment.id),
           ),
@@ -478,14 +478,14 @@ class _CommentComposerState extends ConsumerState<_CommentComposer> {
             onSubmitted: (_) => _submit(),
           ),
         ),
-        const SizedBox(width: FmtSpace.sm),
+        const SizedBox(width: ObsSpace.sm),
         IconButton(
           icon: _submitting
               ? const SizedBox.square(
                   dimension: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : const Icon(Icons.send, color: FmtColors.brand),
+              : Icon(Icons.send, color: ObsColors.brand),
           onPressed: _submitting ? null : _submit,
         ),
       ],

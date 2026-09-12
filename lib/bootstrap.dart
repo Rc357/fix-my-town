@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fixmytown_citizen/app/app.dart';
-import 'package:fixmytown_citizen/app/config/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:obserba/app/app.dart';
+import 'package:obserba/app/config/app_config.dart';
+import 'package:obserba/app/theme/theme_mode_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> bootstrap(AppConfig config) async {
@@ -56,6 +58,8 @@ Future<void> bootstrap(AppConfig config) async {
     }
   }
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+
   // Deliberately not runZonedGuarded: it requires ensureInitialized() and
   // runApp() to execute in the *same* zone, and initializing the binding
   // outside a runZonedGuarded callback (as above — needed so it runs before
@@ -69,7 +73,10 @@ Future<void> bootstrap(AppConfig config) async {
 
   runApp(
     ProviderScope(
-      overrides: [appConfigProvider.overrideWithValue(config)],
+      overrides: [
+        appConfigProvider.overrideWithValue(config),
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+      ],
       child: const App(),
     ),
   );

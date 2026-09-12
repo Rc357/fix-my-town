@@ -1,9 +1,9 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_spacing.dart';
-import 'package:fixmytown_citizen/app/theme/fmt_text_styles.dart';
-import 'package:fixmytown_citizen/app/widgets/status_chip.dart';
-import 'package:fixmytown_citizen/app/widgets/verified_badge.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
+import 'package:obserba/app/theme/obs_spacing.dart';
+import 'package:obserba/app/theme/obs_text_styles.dart';
+import 'package:obserba/app/widgets/status_chip.dart';
+import 'package:obserba/app/widgets/verified_badge.dart';
 
 /// `.card` with `.stripe` from the mockup. The severity stripe is required,
 /// not optional — status is never encoded by chip color alone.
@@ -39,13 +39,13 @@ class ReportCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(FmtRadius.card),
+        borderRadius: BorderRadius.circular(ObsRadius.card),
         child: Container(
-          padding: const EdgeInsets.all(FmtSpace.md),
+          padding: const EdgeInsets.all(ObsSpace.md),
           decoration: BoxDecoration(
-            color: FmtColors.surface,
-            borderRadius: BorderRadius.circular(FmtRadius.card),
-            border: Border.all(color: FmtColors.line),
+            color: ObsColors.surface,
+            borderRadius: BorderRadius.circular(ObsRadius.card),
+            border: Border.all(color: ObsColors.line),
           ),
           child: IntrinsicHeight(
             child: Row(
@@ -58,7 +58,7 @@ class ReportCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
-                const SizedBox(width: FmtSpace.md),
+                const SizedBox(width: ObsSpace.md),
                 Container(
                   width: 36,
                   height: 36,
@@ -68,7 +68,7 @@ class ReportCard extends StatelessWidget {
                   ),
                   child: Icon(icon, color: iconColor, size: 18),
                 ),
-                const SizedBox(width: FmtSpace.md),
+                const SizedBox(width: ObsSpace.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,24 +79,24 @@ class ReportCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               title,
-                              style: const TextStyle(
-                                fontSize: FmtFontSize.lg,
+                              style: TextStyle(
+                                fontSize: ObsFontSize.lg,
                                 fontWeight: FontWeight.w800,
-                                color: FmtColors.ink,
+                                color: ObsColors.ink,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const SizedBox(width: FmtSpace.sm),
+                          const SizedBox(width: ObsSpace.sm),
                           StatusChip(label: statusLabel, tone: statusTone),
                         ],
                       ),
                       const SizedBox(height: 3),
                       Text(
                         meta,
-                        style: const TextStyle(
-                          fontSize: FmtFontSize.sm,
-                          color: FmtColors.muted,
+                        style: TextStyle(
+                          fontSize: ObsFontSize.sm,
+                          color: ObsColors.muted,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

@@ -1,5 +1,5 @@
-import 'package:fixmytown_citizen/app/theme/fmt_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:obserba/app/theme/obs_colors.dart';
 
 /// `.stepper-mini` from the mockup — multi-step form progress
 /// (category -> capture -> review).
@@ -23,11 +23,11 @@ class StepperDots extends StatelessWidget {
             height: 9,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: i <= currentIndex ? FmtColors.amber : FmtColors.line,
+              color: i <= currentIndex ? ObsColors.amber : ObsColors.line,
             ),
           ),
           if (i != total - 1)
-            Expanded(child: Container(height: 2, color: FmtColors.line)),
+            Expanded(child: Container(height: 2, color: ObsColors.line)),
         ],
       ],
     );
